@@ -64,7 +64,7 @@ async def index():
 
 @app.get("/health")
 async def health():
-    return {"status":"ok", "name":APP_NAME, "model":MODEL, "model_configured":model_configured(),
+    return {"status":"ok", "name":APP_NAME, "model":MODEL, "model_configured":await asyncio.to_thread(model_configured),
             "mode":"live", "markets":SUPPORTED_MARKETS}
 
 

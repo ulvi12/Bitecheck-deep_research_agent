@@ -57,6 +57,11 @@ class Fake:
    return calls(('read_source',{'url':URL}))
   return {'role':'assistant','content':json.dumps({'findings':[{'text':'The page states sugar.','source_ids':[SID]}],'gaps':[]})}
 class HarnessTests(unittest.IsolatedAsyncioTestCase):
+ async def test_health_accepts_default_credentials_project_without_env(self):
+  with patch.dict('os.environ', {'GOOGLE_CLOUD_PROJECT':'', 'VERTEXAI_PROJECT':''}), patch('agents.MODEL','vertex_ai/gemini-3.5-flash-lite'), patch('evidence.google.auth.default',return_value=(object(),'cloud-run-project')):
+   async with httpx.AsyncClient(transport=httpx.ASGITransport(app=app),base_url='http://test') as client:
+    self.assertIs((await client.get('/health')).json()['model_configured'],True)
+
  async def test_market_selection_policy_reaches_researchers_without_erasing_user_scope(self):
   for question in ('Compare Nutella in the US and EU', 'Compare Nutella only in the US and Italy'):
    with self.subTest(question=question):

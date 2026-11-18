@@ -16,7 +16,7 @@ from typing import Literal
 
 from pydantic import BaseModel, Field, field_validator
 
-from evidence import EvidenceStore, TOOLS, tool, MARKETS, market_hint
+from evidence import EvidenceStore, TOOLS, tool, MARKETS, market_hint, resolve_vertex_project
 from labels import extract_panels
 
 MODEL = os.getenv("GEMINI_MODEL", "vertex_ai/gemini-3.5-flash-lite")
@@ -28,19 +28,21 @@ class ModelNotConfigured(RuntimeError):
 
 def model_configured() -> bool:
     if MODEL.startswith("vertex_ai/"):
-        return bool(os.getenv("GOOGLE_CLOUD_PROJECT"))
+        return bool(resolve_vertex_project())
     return MODEL.startswith("gemini/") and bool(os.getenv("GEMINI_API_KEY"))
 
 
 async def model_completion(messages: list, tools: list | None = None, required: bool = False, schema=None) -> dict:
-    if not model_configured():
+    use_vertex = MODEL.startswith("vertex_ai/")
+    project = await asyncio.to_thread(resolve_vertex_project) if use_vertex else None
+    if (use_vertex and not project) or (not use_vertex and not model_configured()):
         raise ModelNotConfigured("Set GOOGLE_CLOUD_PROJECT for Vertex, or GEMINI_MODEL and GEMINI_API_KEY for Gemini API.")
     os.environ.setdefault("LITELLM_LOCAL_MODEL_COST_MAP", "True")
     import litellm
     options = {"model": MODEL, "messages": messages, "timeout": 55, "num_retries": 0,
                "max_tokens": 4096, "reasoning_effort": "low"}
-    if MODEL.startswith("vertex_ai/"):
-        options.update(vertex_project=os.environ["GOOGLE_CLOUD_PROJECT"],
+    if use_vertex:
+        options.update(vertex_project=project,
                        vertex_location=os.getenv("VERTEXAI_LOCATION", "global"))
     else:
         options["api_key"] = os.environ["GEMINI_API_KEY"]
