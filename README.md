@@ -23,6 +23,8 @@ Sources are discovered during each request. Depending on the question, they incl
 
 Type a question or choose one of the suggested questions. Name the product, variant, and markets when you know them. For a broad US–EU comparison, BiteCheck looks for comparable labels in EU markets with usable sources. The **Agent map** shows which researchers are working, and nutrition comparisons appear in the answer when suitable labels are available.
 
+Beside the map, **Model cost estimate** shows the current or last query and the chat total. Estimates use reported token usage for Gemini 3.5 Flash and Flash-Lite on Vertex AI at [standard rates](https://cloud.google.com/model-garden/pricing). Grounding query fees, hosting, and billing adjustments are excluded. A plus sign marks partial totals.
+
 | Example query | What to look for |
 | --- | --- |
 | Compare Nutella Classic in the US, Germany and Italy. Does the Italian version have substantially less total sugar? | Compare total sugars per 100 g using Ferrero’s market-specific product labels. The earlier manufacturer-label check found roughly 56–57 g per 100 g in all three markets. |

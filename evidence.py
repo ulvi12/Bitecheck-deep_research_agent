@@ -9,6 +9,7 @@ import google.auth
 from google.auth.exceptions import DefaultCredentialsError
 from concurrent.futures import ThreadPoolExecutor
 from labels import extract_panels, CORE_FIELDS
+from usage_cost import record_vertex
 
 MARKETS = {"US":"United States","FR":"France","DE":"Germany","IT":"Italy","ES":"Spain","NL":"Netherlands","GB":"United Kingdom"}
 NUTRIENTS = ("energy_kcal","total_fat_g","carbohydrates_g","sugars_g","added_sugars_g","saturated_fat_g","sodium_mg","fiber_g","protein_g")
@@ -158,7 +159,10 @@ def grounded_search(query):
     payload={'contents':[{'role':'user','parts':[{'text':'Search the web now for this food-research query. Prefer country-specific manufacturer pages and primary regulators or scientific assessments. Return relevant source links. Do not invent URLs. Query: '+query[:2000]}]}],
              'tools':[{'google_search':{}}], 'generationConfig':{'maxOutputTokens':2500}}
     r=requests.post(url,headers={'Authorization':'Bearer '+credentials.token},json=payload,timeout=(8,40))
-    r.raise_for_status(); body=r.json(); candidates=body.get('candidates',[])
+    r.raise_for_status()
+    body = r.json()
+    record_vertex(model, body, grounded=True)
+    candidates = body.get('candidates', [])
     if not candidates: raise ValueError('Search returned no candidates')
     metadata=candidates[0].get('groundingMetadata',{})
     chunks=metadata.get('groundingChunks',[])
@@ -312,7 +316,10 @@ class EvidenceStore:
                  'generationConfig':{'responseMimeType':'application/json','maxOutputTokens':4000}}
         response=requests.post(f'https://aiplatform.googleapis.com/v1/projects/{project}/locations/global/publishers/google/models/{model}:generateContent',
                  headers={'Authorization':'Bearer '+credentials.token},json=payload,timeout=(8,50))
-        response.raise_for_status();parts=response.json()['candidates'][0]['content']['parts']
+        response.raise_for_status()
+        body = response.json()
+        record_vertex(model, body)
+        parts = body['candidates'][0]['content']['parts']
         transcription=json.loads(''.join(part.get('text','') for part in parts));text=transcription.get('transcription','')
         if not isinstance(text,str) or len(text)<30:raise ValueError('No readable label transcription')
         sid='web-'+hashlib.sha256(final.encode()).hexdigest()[:12]

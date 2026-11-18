@@ -18,6 +18,7 @@ from pydantic import BaseModel, Field, field_validator
 
 from evidence import EvidenceStore, TOOLS, tool, MARKETS, market_hint, resolve_vertex_project
 from labels import extract_panels
+from usage_cost import UsageCost, record_litellm
 
 MODEL = os.getenv("GEMINI_MODEL", "vertex_ai/gemini-3.5-flash-lite")
 
@@ -60,6 +61,7 @@ async def model_completion(messages: list, tools: list | None = None, required: 
         # One short retry for a transient provider throttle; the request's wall cap still applies.
         await asyncio.sleep(2)
         result = await litellm.acompletion(**options)
+    record_litellm(MODEL, options.get("vertex_location", "global"), getattr(result, "usage", None))
     return result.choices[0].message.model_dump(exclude_none=True)
 
 
@@ -109,6 +111,7 @@ class CitationAudit(BaseModel):
 @dataclass
 class RunState:
     store: EvidenceStore
+    cost: UsageCost = field(default_factory=UsageCost, init=False)
     completion: object = model_completion
     trace: list[dict] = field(default_factory=list)
     comparisons: dict = field(default_factory=dict)

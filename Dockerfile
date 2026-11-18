@@ -3,7 +3,7 @@ COPY --from=ghcr.io/astral-sh/uv:0.12.13 /uv /usr/local/bin/uv
 WORKDIR /app
 COPY pyproject.toml uv.lock ./
 RUN uv sync --frozen --no-dev
-COPY app.py agents.py evidence.py labels.py index.html ./
+COPY app.py agents.py evidence.py labels.py usage_cost.py index.html ./
 
 ENV PYTHONUNBUFFERED=1 PORT=8080
 EXPOSE 8080

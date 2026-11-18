@@ -21,6 +21,72 @@ details{margin-top:20px;font-size:14px}summary{cursor:pointer;color:var(--accent
 
 #chat-scroll::-webkit-scrollbar{display:none;width:0;height:0}
 .nutrition-comparison{margin:26px 0}.nutrition-comparison h3{font-size:16px;font-weight:600;margin:0 0 10px}
+
+/* Keep the welcome and starter questions compact in short windows. */
+#chat-scroll { padding-top: 12px; padding-bottom: 16px; }
+.hero { grid-template-columns: minmax(0, 1fr) clamp(80px, 20dvh, 160px); gap: 16px; }
+.hero h1 { font-size: clamp(27px, 5.6dvh, 42px); margin-bottom: 8px; }
+.hero .food-art { width: 100%; height: auto; max-height: 22dvh; }
+#welcome { margin-bottom: 0; }
+#welcome .intro { line-height: 1.42; }
+.suggestions { margin-top: clamp(9px, 2.4dvh, 20px); }
+.suggestions h2 { line-height: 1.2; margin-bottom: 4px; }
+.suggestions > p { line-height: 1.35; margin-bottom: 8px; }
+.prompt { grid-template-columns: 32px minmax(0, 1fr); gap: 10px; margin-bottom: clamp(5px, 1.3dvh, 11px); }
+.prompt:last-child { margin-bottom: 0; }
+.prompt-art { width: 32px; height: 36px; }
+.suggestions button { font-size: 15px; line-height: 1.25; }
+.origin { line-height: 1.3; margin-top: 2px; }
+
+.message { display: grid; gap: 12px; margin-bottom: 28px; min-width: 0; }
+.question {
+  justify-self: end; max-width: min(85%, 680px); margin: 0;
+  background: #e9eee4; border-radius: 15px 15px 4px 15px; padding: 10px 15px;
+  font-size: 16px; font-weight: 400; line-height: 1.5; white-space: pre-wrap;
+}
+.answer {
+  min-width: 0; background: #fffef9; border: 1px solid #e9e3d5;
+  border-radius: 4px 15px 15px 15px; padding: clamp(12px, 2vw, 20px);
+  overflow-wrap: anywhere;
+}
+.answer > :last-child { margin-bottom: 0; }
+.answer .progress { padding-bottom: 0; }
+#composer { padding-top: 8px; padding-bottom: 12px; }
+#question {
+  display: block; box-sizing: border-box; min-height: 50px;
+  max-height: min(19rem, 40dvh); padding: 10px 14px; overflow-y: auto;
+  font: 400 16px/1.45 Arial, Helvetica, sans-serif;
+}
+#question:focus { outline: none; border-color: var(--accent); background: #fff; }
+
+.workspace { max-width: 1400px; grid-template-columns: minmax(0, 1fr) 450px; gap: 30px; }
+header { max-width: 1400px; }
+.architecture-panel {
+  display: grid; grid-template-columns: minmax(0, 1fr) 122px; gap: 16px;
+  grid-template-rows: minmax(0, 1fr);
+}
+.map-return-label { text-anchor: middle; }
+.cost-panel { align-self: start; min-width: 0; }
+.cost-panel h2 { margin: 0; font-size: 14px; font-weight: 600; line-height: 1.45; }
+.cost-panel dl { margin: 13px 0 9px; }
+.cost-panel dt { margin-top: 8px; color: var(--muted); font-size: 12px; }
+.cost-panel dd { margin: 0; font-size: 16px; font-variant-numeric: tabular-nums; }
+.cost-panel p { margin: 0; font-size: 11px; line-height: 1.4; color: var(--muted); }
+@media (min-width: 901px) and (max-width: 1099px) {
+  .workspace { grid-template-columns: minmax(0, 1fr) 355px; gap: 22px; }
+  .architecture-panel { grid-template-columns: minmax(0, 1fr) 100px; gap: 9px; }
+}
+@media (max-width: 900px) {
+  .workspace { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .architecture-panel { display: none; max-width: 540px; grid-template-columns: minmax(0, 1fr) min(26vw, 122px); gap: 8px; }
+  body[data-map-open=true] .architecture-panel { display: grid; }
+}
+@media (max-height: 540px) {
+  .hero { grid-template-columns: minmax(0, 1fr) min(16dvh, 90px); }
+  .hero h1 { font-size: clamp(22px, 5.8dvh, 30px); }
+  #welcome .intro { font-size: 14px; }
+  .suggestions > p { margin-bottom: 4px; }
+}
 </style></head><body><svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true"><defs>
 <symbol id="croissant" viewBox="0 0 120 76"><path d="M10 32C4 43 5 62 14 64C22 67 27 52 32 49C46 60 73 60 88 49C94 53 99 68 108 63C117 58 116 42 108 31C95 13 78 9 60 10C37 9 19 18 10 32Z" fill="#d98b27" stroke="#75471e" stroke-width="2.5" stroke-linejoin="round"/><path d="M16 32C28 17 46 15 61 15C79 15 97 22 104 34L94 47C73 55 47 55 27 46Z" fill="#f5c466"/><path d="M37 17L30 45M57 12L52 52M76 14L83 50M94 23L99 44" stroke="#b77324" stroke-width="4" stroke-linecap="round"/><path d="M42 22L39 32M62 21L61 33M79 24L82 32" stroke="#ffe5a0" stroke-width="4" stroke-linecap="round"/></symbol>
 <symbol id="orange" viewBox="0 0 64 64"><circle cx="31" cy="36" r="24" fill="#ef9e34"/><path d="M31 14C32 2 47 4 51 5C47 15 39 18 31 14" fill="#49744a"/><path d="M14 30C15 23 20 20 23 19" fill="none" stroke="#ffcf7c" stroke-width="4" stroke-linecap="round"/></symbol>
@@ -31,11 +97,19 @@ details{margin-top:20px;font-size:14px}summary{cursor:pointer;color:var(--accent
 <div class="workspace"><div class="chat-pane"><main id="chat-scroll" tabindex="0" aria-label="Food research conversation"><p id="notice" role="alert" hidden></p><section id="welcome"><div class="hero"><div><h1>Food claims, served<br>with evidence</h1><p class="intro">US and EU food, side by side. Follow the ingredients, compare the labels, and see what holds up.</p></div>
 <svg class="food-art" viewBox="0 0 240 240" aria-hidden="true"><circle cx="120" cy="120" r="110" fill="#eee7d4"/><circle cx="120" cy="120" r="96" fill="#fffdf5" stroke="#d9d3bf" stroke-width="2"/><circle cx="120" cy="120" r="75" fill="none" stroke="#e6e0cd" stroke-width="2"/><g transform="rotate(-14 115 126)"><path d="M64 84Q112 57 159 83L115 170Z" fill="#efbd59" stroke="#a5692d" stroke-width="2.5" stroke-linejoin="round"/><path d="M73 88Q111 68 150 87L115 155Z" fill="#f8da88"/><path d="M66 84Q111 58 157 83" fill="none" stroke="#d28a38" stroke-width="13" stroke-linecap="round"/><circle cx="103" cy="101" r="10" fill="#c95842"/><circle cx="132" cy="105" r="9" fill="#c95842"/><circle cx="115" cy="132" r="8" fill="#c95842"/><path d="M85 110Q101 106 98 121Q87 124 85 110M118 81Q132 76 133 88Q124 96 118 81" fill="#49744a"/></g><use href="#orange" x="135" y="38" width="62" height="62"/><path d="M67 174C68 159 82 153 92 159C102 154 115 163 113 177C111 196 76 201 67 174" fill="#c95842"/><path d="M91 158L80 151L85 163L98 155M91 158L93 148" fill="none" stroke="#49744a" stroke-width="4" stroke-linecap="round"/><g transform="translate(35 43)"><path d="M0 24L23 0" stroke="#49744a" stroke-width="2.5"/><path d="M8 16Q-6 14 0 5Q13 4 8 16M15 9Q12 -5 24 -4Q30 7 15 9M10 15Q23 12 25 23Q16 29 10 15" fill="#6b8757"/></g><g fill="#665579"><circle cx="180" cy="176" r="9"/><circle cx="192" cy="188" r="9"/><circle cx="176" cy="192" r="8"/></g></svg></div>
 
-</section><aside class="suggestions" aria-label="Suggested food questions"><h2>Heard this one?</h2><p>Questions adapted from real headlines and discussions</p>
+</section><aside class="suggestions" aria-label="Suggested food questions"><h2>Questions to explore</h2><p>Questions adapted from real headlines and discussions</p>
 <div class="prompt"><svg class="prompt-art" aria-hidden="true"><use href="#jar"/></svg><div><button type="button" data-question="Compare Nutella Classic sold in the US and EU. Select EU markets based on the strongest current comparable manufacturer labels you can retrieve. Are there meaningful differences in ingredients or sugar per 100 g? Find current manufacturer labels and distinguish taste claims from nutritional evidence.">Is Nutella different in the US and EU? <span aria-hidden="true">↗</span></button><p class="origin">Inspired by <a href="https://www.tastingtable.com/1001364/is-there-a-difference-between-american-and-european-nutella/" target="_blank" rel="noopener noreferrer">Tasting Table’s Nutella comparison ↗</a></p></div></div>
 <div class="prompt"><svg class="prompt-art" aria-hidden="true"><use href="#orange"/></svg><div><button type="button" data-question="Compare regular Fanta Orange sold in the US and EU. Select EU markets based on the strongest current comparable manufacturer labels you can retrieve. Why do its color and ingredients differ? Find current manufacturer labels, compare sugar per 100 ml, and explain what color alone cannot tell us about safety.">Why does Fanta look different across borders? <span aria-hidden="true">↗</span></button><p class="origin">Inspired by <a href="https://www.reddit.com/r/foodscience/comments/1c58tni/" target="_blank" rel="noopener noreferrer">a Fanta discussion in r/foodscience ↗</a></p></div></div>
 <div class="prompt"><svg class="prompt-art" aria-hidden="true"><use href="#sweet"/></svg><div><button type="button" data-question="Is titanium dioxide (E171) permitted as a food additive in the US and EU? Find current official rules and explain the evidence and uncertainty behind any different decisions.">An additive banned in the EU, allowed in the US? <span aria-hidden="true">↗</span></button><p class="origin">Inspired by <a href="https://time.com/7210717/food-additives-us-fda-banned-europe/" target="_blank" rel="noopener noreferrer">TIME’s reporting on food additives ↗</a></p></div></div>
-</aside><div id="conversation" aria-live="polite"></div></main><form id="composer"><div class="compose-inner"><textarea id="question" aria-label="Your food question" placeholder="What’s the food claim?" maxlength="6000" required rows="2"></textarea><button id="send" type="submit" aria-label="Send question"><svg aria-hidden="true"><use href="#croissant"/></svg><span>Send</span></button></div></form></div><aside class="architecture-panel" aria-label="Live agent architecture"><section id="agent-map" aria-label="Agent map"><div class="map-heading"><h2>Agent map</h2><span id="map-status">Ready</span></div><div class="map-content"><p id="map-question"></p><svg class="architecture-svg" viewBox="0 0 320 510" role="group" aria-label="Research team architecture"><defs><marker id="map-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M1 1L9 5L1 9" fill="none" stroke="#8a8065" stroke-width="1.5"/></marker></defs><path class="map-edge" data-edge="clarify_plan" data-state="waiting" d="M160 68V80"/><path class="map-edge" data-edge="plan_product" data-state="waiting" d="M160 132V144H55V164"/><path class="map-edge" data-edge="plan_regulation" data-state="waiting" d="M160 132V164"/><path class="map-edge" data-edge="plan_evidence" data-state="waiting" d="M160 132V144H265V164"/><path class="map-edge" data-edge="product_check" data-state="waiting" d="M55 216V234H160V248"/><path class="map-edge" data-edge="regulation_check" data-state="waiting" d="M160 216V248"/><path class="map-edge" data-edge="evidence_check" data-state="waiting" d="M265 216V234H160V248"/><path class="map-edge" data-edge="check_plan" data-state="waiting" d="M152 260H12V92H148"/><path class="map-edge" data-edge="check_writer" data-state="waiting" d="M160 300V318"/><path class="map-edge" data-edge="writer_review" data-state="waiting" d="M160 370V388"/><path class="map-edge" data-edge="review_writer" data-state="waiting" d="M168 400H304V330H172"/><path class="map-edge" data-edge="review_answer" data-state="waiting" d="M160 440V458"/><text class="map-return-label" transform="translate(8 218) rotate(-90)">follow-up</text><text class="map-return-label" transform="translate(315 401) rotate(-90)">revise</text><g id="map-clarifier" class="map-node" data-node="clarifier" data-state="waiting" role="button" tabindex="0" aria-pressed="false" aria-label="Clarifier"><rect class="hit" x="111" y="16" width="98" height="48"/><circle class="map-dot" cx="160" cy="28" r="6"/><text class="map-label" x="160" y="49">Clarifier</text><text class="map-state" x="160" y="63"></text></g><g id="map-lead_plan" class="map-node" data-node="lead_plan" data-state="waiting" role="button" tabindex="0" aria-pressed="false" aria-label="Lead · plan"><rect class="hit" x="111" y="80" width="98" height="48"/><circle class="map-dot" cx="160" cy="92" r="6"/><text class="map-label" x="160" y="113">Lead · plan</text><text class="map-state" x="160" y="127"></text></g><g id="map-product" class="map-node" data-node="product" data-state="waiting" role="button" tabindex="0" aria-pressed="false" aria-label="Product"><rect class="hit" x="6" y="164" width="98" height="48"/><circle class="map-dot" cx="55" cy="176" r="6"/><text class="map-label" x="55" y="197">Product</text><text class="map-state" x="55" y="211"></text></g><g id="map-regulation" class="map-node" data-node="regulation" data-state="waiting" role="button" tabindex="0" aria-pressed="false" aria-label="Regulation"><rect class="hit" x="111" y="164" width="98" height="48"/><circle class="map-dot" cx="160" cy="176" r="6"/><text class="map-label" x="160" y="197">Regulation</text><text class="map-state" x="160" y="211"></text></g><g id="map-evidence" class="map-node" data-node="evidence" data-state="waiting" role="button" tabindex="0" aria-pressed="false" aria-label="Evidence"><rect class="hit" x="216" y="164" width="98" height="48"/><circle class="map-dot" cx="265" cy="176" r="6"/><text class="map-label" x="265" y="197">Evidence</text><text class="map-state" x="265" y="211"></text></g><g id="map-lead_check" class="map-node" data-node="lead_check" data-state="waiting" role="button" tabindex="0" aria-pressed="false" aria-label="Lead · check gaps"><rect class="hit" x="111" y="248" width="98" height="48"/><circle class="map-dot" cx="160" cy="260" r="6"/><text class="map-label" x="160" y="281">Lead · check gaps</text><text class="map-state" x="160" y="295"></text></g><g id="map-writer" class="map-node" data-node="writer" data-state="waiting" role="button" tabindex="0" aria-pressed="false" aria-label="Writer"><rect class="hit" x="111" y="318" width="98" height="48"/><circle class="map-dot" cx="160" cy="330" r="6"/><text class="map-label" x="160" y="351">Writer</text><text class="map-state" x="160" y="365"></text></g><g id="map-reviewer" class="map-node" data-node="reviewer" data-state="waiting" role="button" tabindex="0" aria-pressed="false" aria-label="Citation reviewer"><rect class="hit" x="111" y="388" width="98" height="48"/><circle class="map-dot" cx="160" cy="400" r="6"/><text class="map-label" x="160" y="421">Citation reviewer</text><text class="map-state" x="160" y="435"></text></g><g id="map-answer" class="map-node" data-node="answer" data-state="waiting" role="button" tabindex="0" aria-pressed="false" aria-label="Answer"><rect class="hit" x="111" y="458" width="98" height="48"/><circle class="map-dot" cx="160" cy="470" r="6"/><text class="map-label" x="160" y="491">Answer</text><text class="map-state" x="160" y="505"></text></g></svg><div class="map-legend" aria-hidden="true"><span>Waiting</span><span class="working">Working</span><span class="finished">Finished</span></div><p id="map-detail" aria-live="polite"></p></div></section></aside></div>
+</aside><div id="conversation" aria-live="polite"></div></main><form id="composer"><div class="compose-inner"><textarea id="question" aria-label="Your food question" placeholder="What’s the food claim?" maxlength="6000" required rows="1"></textarea><button id="send" type="submit" aria-label="Send question"><svg aria-hidden="true"><use href="#croissant"/></svg><span>Send</span></button></div></form></div><aside class="architecture-panel" aria-label="Live agent architecture"><section id="agent-map" aria-label="Agent map"><div class="map-heading"><h2>Agent map</h2><span id="map-status">Ready</span></div><div class="map-content"><p id="map-question"></p><svg class="architecture-svg" viewBox="0 0 320 510" role="group" aria-label="Research team architecture"><defs><marker id="map-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M1 1L9 5L1 9" fill="none" stroke="#8a8065" stroke-width="1.5"/></marker></defs><path class="map-edge" data-edge="clarify_plan" data-state="waiting" d="M160 68V80"/><path class="map-edge" data-edge="plan_product" data-state="waiting" d="M160 132V144H55V164"/><path class="map-edge" data-edge="plan_regulation" data-state="waiting" d="M160 132V164"/><path class="map-edge" data-edge="plan_evidence" data-state="waiting" d="M160 132V144H265V164"/><path class="map-edge" data-edge="product_check" data-state="waiting" d="M55 216V234H160V248"/><path class="map-edge" data-edge="regulation_check" data-state="waiting" d="M160 216V248"/><path class="map-edge" data-edge="evidence_check" data-state="waiting" d="M265 216V234H160V248"/><path class="map-edge" data-edge="check_plan" data-state="waiting" d="M152 260H12V92H148"/><path class="map-edge" data-edge="check_writer" data-state="waiting" d="M160 300V318"/><path class="map-edge" data-edge="writer_review" data-state="waiting" d="M160 370V388"/><path class="map-edge" data-edge="review_writer" data-state="waiting" d="M168 400H304V330H172"/><path class="map-edge" data-edge="review_answer" data-state="waiting" d="M160 440V458"/><text class="map-return-label" transform="translate(8 176) rotate(-90)">follow-up</text><text class="map-return-label" transform="translate(315 365) rotate(-90)">revise</text><g id="map-clarifier" class="map-node" data-node="clarifier" data-state="waiting" role="button" tabindex="0" aria-pressed="false" aria-label="Clarifier"><rect class="hit" x="111" y="16" width="98" height="48"/><circle class="map-dot" cx="160" cy="28" r="6"/><text class="map-label" x="160" y="49">Clarifier</text><text class="map-state" x="160" y="63"></text></g><g id="map-lead_plan" class="map-node" data-node="lead_plan" data-state="waiting" role="button" tabindex="0" aria-pressed="false" aria-label="Lead · plan"><rect class="hit" x="111" y="80" width="98" height="48"/><circle class="map-dot" cx="160" cy="92" r="6"/><text class="map-label" x="160" y="113">Lead · plan</text><text class="map-state" x="160" y="127"></text></g><g id="map-product" class="map-node" data-node="product" data-state="waiting" role="button" tabindex="0" aria-pressed="false" aria-label="Product"><rect class="hit" x="6" y="164" width="98" height="48"/><circle class="map-dot" cx="55" cy="176" r="6"/><text class="map-label" x="55" y="197">Product</text><text class="map-state" x="55" y="211"></text></g><g id="map-regulation" class="map-node" data-node="regulation" data-state="waiting" role="button" tabindex="0" aria-pressed="false" aria-label="Regulation"><rect class="hit" x="111" y="164" width="98" height="48"/><circle class="map-dot" cx="160" cy="176" r="6"/><text class="map-label" x="160" y="197">Regulation</text><text class="map-state" x="160" y="211"></text></g><g id="map-evidence" class="map-node" data-node="evidence" data-state="waiting" role="button" tabindex="0" aria-pressed="false" aria-label="Evidence"><rect class="hit" x="216" y="164" width="98" height="48"/><circle class="map-dot" cx="265" cy="176" r="6"/><text class="map-label" x="265" y="197">Evidence</text><text class="map-state" x="265" y="211"></text></g><g id="map-lead_check" class="map-node" data-node="lead_check" data-state="waiting" role="button" tabindex="0" aria-pressed="false" aria-label="Lead · check gaps"><rect class="hit" x="111" y="248" width="98" height="48"/><circle class="map-dot" cx="160" cy="260" r="6"/><text class="map-label" x="160" y="281">Lead · check gaps</text><text class="map-state" x="160" y="295"></text></g><g id="map-writer" class="map-node" data-node="writer" data-state="waiting" role="button" tabindex="0" aria-pressed="false" aria-label="Writer"><rect class="hit" x="111" y="318" width="98" height="48"/><circle class="map-dot" cx="160" cy="330" r="6"/><text class="map-label" x="160" y="351">Writer</text><text class="map-state" x="160" y="365"></text></g><g id="map-reviewer" class="map-node" data-node="reviewer" data-state="waiting" role="button" tabindex="0" aria-pressed="false" aria-label="Citation reviewer"><rect class="hit" x="111" y="388" width="98" height="48"/><circle class="map-dot" cx="160" cy="400" r="6"/><text class="map-label" x="160" y="421">Citation reviewer</text><text class="map-state" x="160" y="435"></text></g><g id="map-answer" class="map-node" data-node="answer" data-state="waiting" role="button" tabindex="0" aria-pressed="false" aria-label="Answer"><rect class="hit" x="111" y="458" width="98" height="48"/><circle class="map-dot" cx="160" cy="470" r="6"/><text class="map-label" x="160" y="491">Answer</text><text class="map-state" x="160" y="505"></text></g></svg><div class="map-legend" aria-hidden="true"><span>Waiting</span><span class="working">Working</span><span class="finished">Finished</span></div><p id="map-detail" aria-live="polite"></p></div></section>
+<section class="cost-panel" aria-label="Estimated Vertex model cost">
+  <h2>Model cost estimate</h2>
+  <dl>
+    <dt>Whole chat</dt><dd id="chat-cost">—</dd>
+    <dt id="query-cost-label">Last query</dt><dd id="query-cost">—</dd>
+  </dl>
+  <p id="cost-note">Search and hosting excluded.</p>
+</section></aside></div>
 
 <script>
 'use strict';const $=id=>document.getElementById(id);let busy=false,sessionId=null,turns=[];const key='bitecheck.live-chat.v1';
@@ -59,7 +133,7 @@ function selectComparisonRecords(records){
   return [...selected.values()];
 }
 function renderComparison(c,root){const records=selectComparisonRecords(c.records||[]);if(!records.length)return;const d=el('section',undefined,'nutrition-comparison');d.append(el('h3','Nutrition comparison · per '+c.basis));const wrap=el('div',undefined,'table-scroll'),t=el('table'),head=el('tr');head.append(el('th','Nutrient'));for(const r of records){const th=el('th');const country={US:'United States',FR:'France',DE:'Germany',IT:'Italy',ES:'Spain',NL:'Netherlands',GB:'United Kingdom',EU:'European Union'}[comparisonMarket(r)]||r.market||r.country||r.category||r.name||'Unknown';th.append(r.source_url?a(country,r.source_url):el('span',country));head.append(th)};t.append(head);for(const [k,v]of Object.entries(names)){const tr=el('tr');tr.append(el('td',v));for(const r of records){const n=r.normalized_nutrients?.[k];tr.append(el('td',!knownNutritionValue(n)?'Unknown':Number(n).toLocaleString(undefined,{maximumFractionDigits:1})))}t.append(tr)}wrap.append(t);d.append(wrap,el('small','Calculated from retrieved label declarations. Missing values are not zero.'));root.append(d)}
-function entry(question){const article=el('article',undefined,'message');article.append(el('h2',question,'question'));const body=el('div',undefined,'answer');article.append(body);$('conversation').append(article);return {article,body}}
+function entry(question){const article=el('article',undefined,'message');article.append(el('p',question,'question'));const body=el('div',undefined,'answer');article.append(body);$('conversation').append(article);return {article,body}}
 function result(body,data,question=''){body.replaceChildren();const sources=data.sources||[];if(data.report){body.append(paragraph(data.report.answer,sources));for(const f of data.report.findings)body.append(paragraph(f,sources));if(data.report.limitations.length){const limits=el('div',undefined,'limits');limits.append(el('p','What remains uncertain'));const ul=el('ul');for(const l of data.report.limitations)ul.append(el('li',l));limits.append(ul);body.append(limits)}}else body.append(el('p',data.response||data.detail||'The investigation could not finish.',data.status==='error'?'error':''));for(const c of data.comparisons||[])renderComparison(c,body);if(sources.length){const d=el('details');d.append(el('summary','Sources for this answer ('+sources.length+')'));const list=el('ol');for(const s of sources){const li=el('li');li.append(a(s.title,s.url),el('small',s.publisher+' · retrieved '+new Date(s.observed_date).toLocaleString()));list.append(li)}d.append(list);body.append(d)}if(data.search_suggestions?.length){const d=el('details');d.append(el('summary','Google Search queries'));for(const html of data.search_suggestions){const frame=el('iframe');frame.className='search-entry';frame.title='Google Search suggestions';frame.sandbox='allow-popups allow-popups-to-escape-sandbox';frame.srcdoc=html;d.append(frame)}body.append(d)}renderActivity(data.tool_calls,body);paintArchitecture(data.activity||null,data.status||'error',question);}
 
 // Architecture view
@@ -243,20 +317,59 @@ function startResearchProgress(root,requestId,options={}){
   return ()=>{stopped=true;cancelEvery(timer);if(nextPoll!==undefined)cancelAfter(nextPoll)};
 }
 
+
+function paintCost(inFlight, running=false) {
+  const snapshots=turns.map(turn=>turn.data.model_cost);
+  if(running)snapshots.push(inFlight);
+  const latest=snapshots.at(-1);
+  const amounts=snapshots.filter(snapshot=>Number.isFinite(snapshot?.usd));
+  const total=amounts.reduce((sum,snapshot)=>sum+snapshot.usd,0);
+  const partial=snapshots.some(snapshot=>snapshot?.partial||!Number.isFinite(snapshot?.usd));
+  const format=usd=>usd===0?'$0.00':usd<0.0001?'<$0.0001':'$'+usd.toFixed(4);
+  $('query-cost-label').textContent=running?'Current query':'Last query';
+  $('query-cost').textContent=Number.isFinite(latest?.usd)?format(latest.usd)+(latest.partial?'+':''):'—';
+  $('chat-cost').textContent=amounts.length?format(total)+(partial?'+':''):'—';
+  $('cost-note').textContent=partial&&(!running||snapshots.length>1||inFlight?.partial)
+    ?'Partial estimate. Search and hosting excluded.'
+    :'Search and hosting excluded.';
+}
+function resizeComposer() {
+  const input=$('question');
+  if(!input.clientWidth)return;
+  input.style.height='auto';
+  input.style.height=(input.scrollHeight+input.offsetHeight-input.clientHeight)+'px';
+}
+
 try{const old=JSON.parse(sessionStorage.getItem(key)||'null');if(old){sessionId=old.sessionId;turns=old.turns||[];for(const t of turns){const e=entry(t.question);result(e.body,t.data,t.question)}}}catch{}
-document.querySelectorAll('[data-question]').forEach(n=>n.addEventListener('click',()=>{if(busy)return;$('question').value=n.dataset.question;$('question').focus({preventScroll:true})}));
-$('question').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();$('composer').requestSubmit()}});
+paintCost();
+$('question').addEventListener('input',resizeComposer);
+window.addEventListener('resize',resizeComposer);
+document.querySelectorAll('[data-question]').forEach(n=>n.addEventListener('click',()=>{if(busy)return;$('question').value=n.dataset.question;resizeComposer();$('question').focus({preventScroll:true})}));
+$('question').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey&&!e.isComposing){e.preventDefault();$('composer').requestSubmit()}});
 $('composer').addEventListener('submit',async e=>{
   e.preventDefault();const question=$('question').value.trim();if(busy||!question)return;
-  busy=true;$('send').disabled=true;$('new').disabled=true;$('question').value='';
+  busy=true;$('send').disabled=true;$('new').disabled=true;$('question').value='';resizeComposer();
   const item=entry(question),progress=el('div',undefined,'progress');item.body.append(progress);scrollTo(item.article);
-  const requestId=crypto.randomUUID(),stopProgress=startResearchProgress(progress,requestId,{onProgress:p=>paintArchitecture(p.activity,'running',question)});paintArchitecture(null,'running',question);
+  const requestId=crypto.randomUUID();
+  let liveCost=null;
+  paintCost(null,true);
+  const stopProgress=startResearchProgress(progress,requestId,{onProgress:p=>{
+    paintArchitecture(p.activity,'running',question);
+    if(p.model_cost){liveCost=p.model_cost;paintCost(liveCost,true)}
+  }});
+  paintArchitecture(null,'running',question);
   try{
     const r=await fetch('/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:question,session_id:sessionId,request_id:requestId})});
-    const data=await r.json();stopProgress();if(data.session_id)sessionId=data.session_id;result(item.body,data,question);turns.push({question,data});save();
-  }catch{stopProgress();result(item.body,{status:'error',activity:currentArchitecture.activity,response:'The connection ended before the answer arrived. Please try again.'},question)}
+    const data=await r.json();stopProgress();if(data.session_id)sessionId=data.session_id;result(item.body,data,question);turns.push({question,data});paintCost();save();
+  }catch{
+    stopProgress();
+    const data={status:'error',activity:currentArchitecture.activity,
+      model_cost:{usd:liveCost?.usd??null,partial:true},
+      response:'The connection ended before the answer arrived. Please try again.'};
+    result(item.body,data,question);turns.push({question,data});paintCost();save();
+  }
   finally{stopProgress();busy=false;$('send').disabled=false;$('new').disabled=false}
 });
-$('new').addEventListener('click',async()=>{if(busy)return;if(sessionId){try{const r=await fetch('/clear',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({session_id:sessionId})});if(!r.ok)throw Error()}catch{$('notice').hidden=false;$('notice').textContent='Could not close this chat. Please try again.';return}}sessionId=null;turns=[];selectedArchitectureNode=null;paintArchitecture(null,'idle','');sessionStorage.removeItem(key);$('conversation').replaceChildren();$('welcome').hidden=false;$('notice').hidden=true;$('question').value='';setMapOpen(false);$('chat-scroll').scrollTo({top:0,behavior:'auto'});$('question').focus({preventScroll:true})});
+$('new').addEventListener('click',async()=>{if(busy)return;if(sessionId){try{const r=await fetch('/clear',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({session_id:sessionId})});if(!r.ok)throw Error()}catch{$('notice').hidden=false;$('notice').textContent='Could not close this chat. Please try again.';return}}sessionId=null;turns=[];paintCost();selectedArchitectureNode=null;paintArchitecture(null,'idle','');sessionStorage.removeItem(key);$('conversation').replaceChildren();$('welcome').hidden=false;$('notice').hidden=true;$('question').value='';setMapOpen(false);resizeComposer();$('chat-scroll').scrollTo({top:0,behavior:'auto'});$('question').focus({preventScroll:true})});
 fetch('/health').then(r=>r.json()).then(h=>{if(!h.model_configured){$('notice').hidden=false;$('notice').textContent='Research is not connected yet. Check the server’s model configuration.'}}).catch(()=>{$('notice').hidden=false;$('notice').textContent='Could not connect to BiteCheck. Start the local server and reload.'});
 </script></body></html>

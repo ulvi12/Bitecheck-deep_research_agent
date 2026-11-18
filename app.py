@@ -16,6 +16,7 @@ from pydantic import BaseModel, Field
 
 from agents import MODEL, ModelNotConfigured, RunState, model_configured, run_research
 from evidence import EvidenceStore
+from usage_cost import current_usage
 
 SUPPORTED_MARKETS = EvidenceStore().catalog()
 progress_runs: dict[str, RunState] = {}
@@ -51,6 +52,7 @@ class ChatResponse(BaseModel):
     elapsed_seconds: float = 0
     search_suggestions: list[str] = Field(default_factory=list)
     activity: dict = Field(default_factory=dict)
+    model_cost: dict | None = None
 
 
 class ClearRequest(BaseModel):
@@ -77,7 +79,7 @@ async def progress(request_id: uuid.UUID):
     return {"status":"running", "active_agents":sorted(state.active_agents),
             "sources_read":len(state.read_ids),
             "completed_tools":sum(c["status"]=="complete" for c in state.trace),
-            "activity":state.activity_snapshot()}
+            "activity":state.activity_snapshot(), "model_cost":state.cost.snapshot()}
 
 
 @app.post("/chat", response_model=ChatResponse)
@@ -104,6 +106,7 @@ async def chat(request: ChatRequest):
         if len(session.history) >= 40:
             return ChatResponse(response="Start a new chat to continue; this conversation reached its length limit.", session_id=session_id, tool_calls=[], status="limit")
         progress_runs[request_id] = state
+        usage_token = current_usage.set(state.cost)
         history = [*session.history, {"role":"user", "content":message}]
         try:
             async with asyncio.timeout(max(30, min(280, int(os.getenv("REQUEST_DEADLINE_SECONDS", "260"))))):
@@ -123,6 +126,7 @@ async def chat(request: ChatRequest):
             result = {"response":"The research could not finish. Completed tool calls are preserved below. Check model access and Google Cloud authentication, then retry; no conclusion has been substituted.", "status":"error"}
             status_code = 502
         finally:
+            current_usage.reset(usage_token)
             progress_runs.pop(request_id, None)
         for entry in state.trace:
             if entry["status"] == "running":
@@ -130,7 +134,11 @@ async def chat(request: ChatRequest):
         session.touched = time.monotonic()
         if requested_id and requested_id != session_id:
             result["response"] = "Your earlier chat expired or the server restarted; this is a new conversation. " + result["response"]
+        model_cost = state.cost.snapshot()
+        if result["status"] in ("timeout", "error"):
+            model_cost["partial"] = True
         payload = ChatResponse(**result, session_id=session_id, tool_calls=state.trace, activity=state.activity_snapshot(),
+                               model_cost=model_cost,
                                elapsed_seconds=round(time.monotonic()-state.started, 2))
         return JSONResponse(status_code=status_code, content=payload.model_dump())
 
