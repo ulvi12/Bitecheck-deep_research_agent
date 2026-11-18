@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>BiteCheck</title>
+<style>
+:root{font:16px/1.65 Arial,Helvetica,sans-serif;color:#292e25;background:#faf7ee;--muted:#67695f;--accent:#2b5942;--paper:#faf7ee}
+*{box-sizing:border-box}html{height:100%;overflow:hidden}body{margin:0;height:100vh;height:100dvh;overflow:hidden;display:grid;grid-template-rows:auto minmax(0,1fr)}
+button,textarea{font:inherit}button{cursor:pointer}a{color:var(--accent);text-underline-offset:4px}button:focus-visible,a:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outline-offset:4px}[hidden]{display:none!important}
+header{width:100%;max-width:1280px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:14px 30px}header a{display:flex;align-items:center;gap:9px;color:inherit;text-decoration:none;font-size:23px;font-weight:700}.brand-icon{width:32px;height:32px}.header-actions{display:flex;align-items:center;gap:22px}button.text{border:0;background:none;color:var(--accent);padding:7px 0;font-size:14px}button:disabled{opacity:.55;cursor:wait}#toggle-map{display:none}
+.workspace{width:100%;height:100%;min-height:0;max-width:1280px;padding:0 30px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr) 310px;gap:50px;overflow:hidden}.chat-pane{height:100%;min-width:0;min-height:0;display:grid;grid-template-rows:minmax(0,1fr) auto}
+#chat-scroll{min-width:0;min-height:0;margin:0;padding:20px 12px 28px 0;overflow-x:hidden;overflow-y:auto;overscroll-behavior-y:contain;overflow-anchor:none;scrollbar-width:none;-ms-overflow-style:none}
+.hero{display:grid;grid-template-columns:minmax(0,1fr) 210px;align-items:center;gap:24px}h1{font-size:42px;line-height:1.15;font-weight:700;margin:0 0 20px}.food-art{width:210px;height:210px;transform:rotate(5deg)}#welcome{margin-bottom:34px}#welcome .intro{max-width:470px;color:var(--muted);margin:0}.suggestions{margin-top:34px}.suggestions h2{font-size:20px;line-height:1.4;margin:0 0 2px}.suggestions>p{font-size:13px;color:var(--muted);margin:0 0 22px}.prompt{display:grid;grid-template-columns:46px minmax(0,1fr);gap:16px;margin-bottom:25px;align-items:start}.prompt-art{width:46px;height:52px}.suggestions button{border:0;background:none;color:var(--accent);padding:0;text-align:left;font-size:17px;font-weight:600;line-height:1.4}.suggestions button:hover{text-decoration:underline;text-underline-offset:4px}.origin{font-size:12px;line-height:1.6;margin:5px 0 0;color:var(--muted)}.origin a{color:var(--muted)}
+#conversation:empty{display:none}#conversation:not(:empty){margin-top:42px}.message{margin:0 0 42px}.message:last-child{margin-bottom:0}.question{font-size:24px;line-height:1.4;margin:0 0 26px;font-weight:600;overflow-wrap:anywhere}.answer p{margin:0 0 16px}.answer a.ref{font-size:12px;margin-left:4px}.limits{color:var(--muted);font-size:14px;margin-top:24px}.limits p{margin:0 0 6px}.limits ul{margin:0;padding-left:20px}
+details{margin-top:20px;font-size:14px}summary{cursor:pointer;color:var(--accent);width:fit-content;list-style:none;display:flex;align-items:baseline;gap:10px;padding:4px 0}summary::-webkit-details-marker{display:none}summary::before{content:'›';font-size:22px;line-height:1;display:inline-block;width:12px;flex-shrink:0;transition:transform .15s}details[open]>summary::before{transform:rotate(90deg)}details ol{padding-left:24px}details li{margin:12px 0}small{display:block;color:var(--muted);font-size:12px}pre{font:12px/1.6 Arial,Helvetica,sans-serif;white-space:pre-wrap;overflow-wrap:anywhere;background:#f0ecdf;padding:16px;margin:8px 0 14px 22px}table{border-collapse:collapse;width:100%;font-size:14px;margin:14px 0}th,td{text-align:right;padding:10px 14px 10px 0;border-bottom:1px solid #e1ded3;white-space:nowrap}th:first-child,td:first-child{text-align:left}th{font-weight:500}.table-scroll{overflow-x:auto}.search-entry{width:100%;height:95px;border:0;display:block;margin:8px 0}.error,#notice{color:#943b32}#notice{font-size:14px;margin:0 0 20px}
+.activity-content{margin:16px 0 0 5px;padding:0 0 2px 23px;border-left:3px solid #e3b657}.agent-group{margin:0 0 22px}.agent-name{font-size:14px;font-weight:600;margin:0 0 6px}.research-call{margin:4px 0}.research-call>summary{color:var(--muted);font-size:13px;gap:8px}.research-call>summary::before{content:'+';font-size:16px;width:14px;transform:none}.research-call[open]>summary::before{content:'−'}.call-status{font-size:12px;margin-left:8px}.progress{display:flex;align-items:center;gap:12px;color:var(--muted);font-size:14px;padding-bottom:12px}.progress-mark{width:24px;height:24px;flex-shrink:0;animation:turn 8s linear infinite}.progress-clock{white-space:nowrap;font-variant-numeric:tabular-nums}.progress-phase{flex:1}.progress-count{display:block;font-size:12px;margin-top:2px}
+#composer{position:static;min-width:0;margin:0;padding:14px 12px 20px 0;background:var(--paper)}.compose-inner{display:flex;align-items:center;gap:16px;margin:0}textarea{width:100%;min-width:0;min-height:72px;max-height:104px;resize:none;border:1px solid #a8ac9e;border-radius:12px;padding:14px 16px;background:#fffef9;line-height:1.5;color:inherit}#send{border:0;background:none;color:#64390f;padding:0;min-width:82px;display:flex;flex-direction:column;align-items:center;font-size:13px;font-weight:600}#send svg{width:82px;height:53px;transition:transform .18s}#send:hover svg{transform:translateY(-3px) rotate(-6deg)}#send:disabled svg{transform:none}
+.architecture-panel{height:100%;min-height:0;min-width:0;padding:20px 0 20px;overflow:hidden}#agent-map{height:100%;min-height:0;display:grid;grid-template-rows:auto minmax(0,1fr)}.map-heading{display:flex;align-items:baseline;justify-content:space-between;gap:12px}.map-heading h2{font-size:17px;line-height:1.5;font-weight:600;margin:0}#map-status{font-size:12px;color:var(--muted);white-space:nowrap}.map-content{min-height:0;display:grid;grid-template-rows:auto minmax(0,1fr) auto auto;row-gap:8px;overflow:hidden}#map-question{font-size:12px;line-height:18px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;color:var(--muted);margin:8px 0 0}.architecture-svg{width:100%;height:100%;min-height:0;display:block}.map-edge{stroke:#d9d2c0;stroke-width:1.5;fill:none;marker-end:url(#map-arrow)}.map-edge[data-state=done]{stroke:#69816a}.map-edge[data-state=active]{stroke:#b77525;stroke-width:2;stroke-dasharray:5 5;animation:map-flow .7s linear infinite}.map-node{cursor:pointer;outline:none}.map-node .map-dot{fill:#d9d2c0;stroke:var(--paper);stroke-width:3}.map-node[data-state=done] .map-dot{fill:#2b5942}.map-node[data-state=active] .map-dot{fill:#efbd59;stroke:#a5692d;stroke-width:2}.map-node[data-state=error] .map-dot,.map-node[data-state=interrupted] .map-dot{fill:#c95842}.map-node[data-state=queued] .map-dot,.map-node[data-state=needs_input] .map-dot{fill:#efbd59}.map-node text{font:13px Arial,Helvetica,sans-serif;fill:#292e25;text-anchor:middle}.map-node .map-state{font-size:10px;fill:var(--muted)}.map-node:focus-visible .map-label,.map-node[aria-pressed=true] .map-label{text-decoration:underline;text-underline-offset:4px}.map-node .hit{fill:transparent}.map-legend{display:flex;gap:16px;color:var(--muted);font-size:11px;line-height:18px;margin:0}.map-legend span::before{content:'';display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:5px;background:#d9d2c0}.map-legend .working::before{background:#efbd59}.map-legend .finished::before{background:#2b5942}#map-detail{font-size:12px;line-height:18px;min-height:36px;max-height:36px;margin:0;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow-wrap:anywhere}.map-return-label{font:10px Arial,Helvetica,sans-serif;fill:var(--muted)}
+@keyframes turn{to{transform:rotate(360deg)}}@keyframes map-flow{to{stroke-dashoffset:-10}}@media(prefers-reduced-motion:reduce){*,*::before{animation:none!important;transition:none!important}}
+@media(max-width:1099px) and (min-width:901px){.workspace{grid-template-columns:minmax(0,1fr) 270px;gap:28px}.hero{grid-template-columns:minmax(0,1fr) 140px;gap:14px}.food-art{width:140px;height:160px}h1{font-size:34px}}
+@media(max-width:900px){header{max-width:880px}.workspace{display:grid;grid-template-columns:minmax(0,1fr);max-width:880px;gap:0}#toggle-map{display:block}.architecture-panel{display:none;max-width:420px;width:100%;justify-self:center}body[data-map-open=true] .architecture-panel{display:block}body[data-map-open=true] .chat-pane{display:none}.hero{grid-template-columns:minmax(0,1fr) 180px}.food-art{width:180px;height:180px}}
+@media(max-width:600px){header{padding:10px 20px}header a{font-size:21px}.header-actions{gap:16px}.brand-icon{width:28px;height:28px}.workspace{padding:0 20px}#chat-scroll{padding:20px 8px 24px 0}#composer{padding:10px 8px 14px 0}.hero{grid-template-columns:minmax(0,1fr) 100px;gap:10px}h1{font-size:30px;line-height:1.15;margin-bottom:16px}.food-art{width:105px;height:140px}.intro{font-size:15px}#welcome{margin-bottom:28px}.suggestions{margin-top:28px}.prompt{gap:12px;grid-template-columns:36px minmax(0,1fr)}.prompt-art{width:36px;height:44px}.suggestions button{font-size:16px}.question{font-size:21px}.activity-content{padding-left:15px}.compose-inner{gap:10px}#send{min-width:66px}#send svg{width:66px;height:45px}textarea{font-size:16px;padding:12px 14px;min-height:68px}.architecture-panel{padding:12px 0 16px}}
+@media(max-height:540px){header{padding-top:5px;padding-bottom:5px}.architecture-panel{padding-top:8px;padding-bottom:10px}#map-question{margin-top:2px}.map-content{row-gap:4px}.map-heading h2{font-size:15px}.map-legend{font-size:10px}#map-detail{min-height:18px;max-height:18px;-webkit-line-clamp:1}#composer{padding-top:8px;padding-bottom:10px}textarea{min-height:60px}#send svg{height:42px}}
+
+#chat-scroll::-webkit-scrollbar{display:none;width:0;height:0}
+.nutrition-comparison{margin:26px 0}.nutrition-comparison h3{font-size:16px;font-weight:600;margin:0 0 10px}
+</style></head><body><svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true"><defs>
+<symbol id="croissant" viewBox="0 0 120 76"><path d="M10 32C4 43 5 62 14 64C22 67 27 52 32 49C46 60 73 60 88 49C94 53 99 68 108 63C117 58 116 42 108 31C95 13 78 9 60 10C37 9 19 18 10 32Z" fill="#d98b27" stroke="#75471e" stroke-width="2.5" stroke-linejoin="round"/><path d="M16 32C28 17 46 15 61 15C79 15 97 22 104 34L94 47C73 55 47 55 27 46Z" fill="#f5c466"/><path d="M37 17L30 45M57 12L52 52M76 14L83 50M94 23L99 44" stroke="#b77324" stroke-width="4" stroke-linecap="round"/><path d="M42 22L39 32M62 21L61 33M79 24L82 32" stroke="#ffe5a0" stroke-width="4" stroke-linecap="round"/></symbol>
+<symbol id="orange" viewBox="0 0 64 64"><circle cx="31" cy="36" r="24" fill="#ef9e34"/><path d="M31 14C32 2 47 4 51 5C47 15 39 18 31 14" fill="#49744a"/><path d="M14 30C15 23 20 20 23 19" fill="none" stroke="#ffcf7c" stroke-width="4" stroke-linecap="round"/></symbol>
+<symbol id="jar" viewBox="0 0 64 72"><rect x="13" y="8" width="38" height="12" rx="3" fill="#52694e"/><path d="M15 20H49L53 32V63Q53 68 47 68H17Q11 68 11 63V32Z" fill="#946344"/><path d="M12 33H52V57H12Z" fill="#fff8e4"/><path d="M24 49C17 35 42 31 41 43C40 54 27 58 24 49" fill="#68452f"/><path d="M29 38L36 51" stroke="#b48a56" stroke-width="2"/></symbol>
+<symbol id="sweet" viewBox="0 0 64 64"><path d="M19 24L3 15L6 33L2 45L20 40M45 24L61 15L58 33L62 45L44 40" fill="#e8b351"/><rect x="14" y="19" width="36" height="28" rx="10" fill="#c95842" transform="rotate(-12 32 33)"/><path d="M29 21L35 45" stroke="#f7db96" stroke-width="8"/></symbol>
+</defs></svg>
+<header><a href="/" aria-label="BiteCheck home"><svg class="brand-icon" viewBox="0 0 36 36" aria-hidden="true"><path d="M30 16A14 14 0 1 1 19 4C17 10 23 17 30 16Z" fill="#2b5942"/><path d="M10 20L15 25L25 14" fill="none" stroke="#faf7ee" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>BiteCheck</a><div class="header-actions"><button class="text" id="toggle-map" type="button" aria-expanded="false" aria-controls="agent-map">Agent map</button><button class="text" id="new" type="button">New chat</button></div></header>
+<div class="workspace"><div class="chat-pane"><main id="chat-scroll" tabindex="0" aria-label="Food research conversation"><p id="notice" role="alert" hidden></p><section id="welcome"><div class="hero"><div><h1>Food claims, served<br>with evidence</h1><p class="intro">US and EU food, side by side. Follow the ingredients, compare the labels, and see what holds up.</p></div>
+<svg class="food-art" viewBox="0 0 240 240" aria-hidden="true"><circle cx="120" cy="120" r="110" fill="#eee7d4"/><circle cx="120" cy="120" r="96" fill="#fffdf5" stroke="#d9d3bf" stroke-width="2"/><circle cx="120" cy="120" r="75" fill="none" stroke="#e6e0cd" stroke-width="2"/><g transform="rotate(-14 115 126)"><path d="M64 84Q112 57 159 83L115 170Z" fill="#efbd59" stroke="#a5692d" stroke-width="2.5" stroke-linejoin="round"/><path d="M73 88Q111 68 150 87L115 155Z" fill="#f8da88"/><path d="M66 84Q111 58 157 83" fill="none" stroke="#d28a38" stroke-width="13" stroke-linecap="round"/><circle cx="103" cy="101" r="10" fill="#c95842"/><circle cx="132" cy="105" r="9" fill="#c95842"/><circle cx="115" cy="132" r="8" fill="#c95842"/><path d="M85 110Q101 106 98 121Q87 124 85 110M118 81Q132 76 133 88Q124 96 118 81" fill="#49744a"/></g><use href="#orange" x="135" y="38" width="62" height="62"/><path d="M67 174C68 159 82 153 92 159C102 154 115 163 113 177C111 196 76 201 67 174" fill="#c95842"/><path d="M91 158L80 151L85 163L98 155M91 158L93 148" fill="none" stroke="#49744a" stroke-width="4" stroke-linecap="round"/><g transform="translate(35 43)"><path d="M0 24L23 0" stroke="#49744a" stroke-width="2.5"/><path d="M8 16Q-6 14 0 5Q13 4 8 16M15 9Q12 -5 24 -4Q30 7 15 9M10 15Q23 12 25 23Q16 29 10 15" fill="#6b8757"/></g><g fill="#665579"><circle cx="180" cy="176" r="9"/><circle cx="192" cy="188" r="9"/><circle cx="176" cy="192" r="8"/></g></svg></div>
+
+</section><aside class="suggestions" aria-label="Suggested food questions"><h2>Heard this one?</h2><p>Questions adapted from real headlines and discussions</p>
+<div class="prompt"><svg class="prompt-art" aria-hidden="true"><use href="#jar"/></svg><div><button type="button" data-question="Compare Nutella Classic sold in the US and EU. Select EU markets based on the strongest current comparable manufacturer labels you can retrieve. Are there meaningful differences in ingredients or sugar per 100 g? Find current manufacturer labels and distinguish taste claims from nutritional evidence.">Is Nutella different in the US and EU? <span aria-hidden="true">↗</span></button><p class="origin">Inspired by <a href="https://www.tastingtable.com/1001364/is-there-a-difference-between-american-and-european-nutella/" target="_blank" rel="noopener noreferrer">Tasting Table’s Nutella comparison ↗</a></p></div></div>
+<div class="prompt"><svg class="prompt-art" aria-hidden="true"><use href="#orange"/></svg><div><button type="button" data-question="Compare regular Fanta Orange sold in the US and EU. Select EU markets based on the strongest current comparable manufacturer labels you can retrieve. Why do its color and ingredients differ? Find current manufacturer labels, compare sugar per 100 ml, and explain what color alone cannot tell us about safety.">Why does Fanta look different across borders? <span aria-hidden="true">↗</span></button><p class="origin">Inspired by <a href="https://www.reddit.com/r/foodscience/comments/1c58tni/" target="_blank" rel="noopener noreferrer">a Fanta discussion in r/foodscience ↗</a></p></div></div>
+<div class="prompt"><svg class="prompt-art" aria-hidden="true"><use href="#sweet"/></svg><div><button type="button" data-question="Is titanium dioxide (E171) permitted as a food additive in the US and EU? Find current official rules and explain the evidence and uncertainty behind any different decisions.">An additive banned in the EU, allowed in the US? <span aria-hidden="true">↗</span></button><p class="origin">Inspired by <a href="https://time.com/7210717/food-additives-us-fda-banned-europe/" target="_blank" rel="noopener noreferrer">TIME’s reporting on food additives ↗</a></p></div></div>
+</aside><div id="conversation" aria-live="polite"></div></main><form id="composer"><div class="compose-inner"><textarea id="question" aria-label="Your food question" placeholder="What’s the food claim?" maxlength="6000" required rows="2"></textarea><button id="send" type="submit" aria-label="Send question"><svg aria-hidden="true"><use href="#croissant"/></svg><span>Send</span></button></div></form></div><aside class="architecture-panel" aria-label="Live agent architecture"><section id="agent-map" aria-label="Agent map"><div class="map-heading"><h2>Agent map</h2><span id="map-status">Ready</span></div><div class="map-content"><p id="map-question"></p><svg class="architecture-svg" viewBox="0 0 320 510" role="group" aria-label="Research team architecture"><defs><marker id="map-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M1 1L9 5L1 9" fill="none" stroke="#8a8065" stroke-width="1.5"/></marker></defs><path class="map-edge" data-edge="clarify_plan" data-state="waiting" d="M160 68V80"/><path class="map-edge" data-edge="plan_product" data-state="waiting" d="M160 132V144H55V164"/><path class="map-edge" data-edge="plan_regulation" data-state="waiting" d="M160 132V164"/><path class="map-edge" data-edge="plan_evidence" data-state="waiting" d="M160 132V144H265V164"/><path class="map-edge" data-edge="product_check" data-state="waiting" d="M55 216V234H160V248"/><path class="map-edge" data-edge="regulation_check" data-state="waiting" d="M160 216V248"/><path class="map-edge" data-edge="evidence_check" data-state="waiting" d="M265 216V234H160V248"/><path class="map-edge" data-edge="check_plan" data-state="waiting" d="M152 260H12V92H148"/><path class="map-edge" data-edge="check_writer" data-state="waiting" d="M160 300V318"/><path class="map-edge" data-edge="writer_review" data-state="waiting" d="M160 370V388"/><path class="map-edge" data-edge="review_writer" data-state="waiting" d="M168 400H304V330H172"/><path class="map-edge" data-edge="review_answer" data-state="waiting" d="M160 440V458"/><text class="map-return-label" transform="translate(8 218) rotate(-90)">follow-up</text><text class="map-return-label" transform="translate(315 401) rotate(-90)">revise</text><g id="map-clarifier" class="map-node" data-node="clarifier" data-state="waiting" role="button" tabindex="0" aria-pressed="false" aria-label="Clarifier"><rect class="hit" x="111" y="16" width="98" height="48"/><circle class="map-dot" cx="160" cy="28" r="6"/><text class="map-label" x="160" y="49">Clarifier</text><text class="map-state" x="160" y="63"></text></g><g id="map-lead_plan" class="map-node" data-node="lead_plan" data-state="waiting" role="button" tabindex="0" aria-pressed="false" aria-label="Lead · plan"><rect class="hit" x="111" y="80" width="98" height="48"/><circle class="map-dot" cx="160" cy="92" r="6"/><text class="map-label" x="160" y="113">Lead · plan</text><text class="map-state" x="160" y="127"></text></g><g id="map-product" class="map-node" data-node="product" data-state="waiting" role="button" tabindex="0" aria-pressed="false" aria-label="Product"><rect class="hit" x="6" y="164" width="98" height="48"/><circle class="map-dot" cx="55" cy="176" r="6"/><text class="map-label" x="55" y="197">Product</text><text class="map-state" x="55" y="211"></text></g><g id="map-regulation" class="map-node" data-node="regulation" data-state="waiting" role="button" tabindex="0" aria-pressed="false" aria-label="Regulation"><rect class="hit" x="111" y="164" width="98" height="48"/><circle class="map-dot" cx="160" cy="176" r="6"/><text class="map-label" x="160" y="197">Regulation</text><text class="map-state" x="160" y="211"></text></g><g id="map-evidence" class="map-node" data-node="evidence" data-state="waiting" role="button" tabindex="0" aria-pressed="false" aria-label="Evidence"><rect class="hit" x="216" y="164" width="98" height="48"/><circle class="map-dot" cx="265" cy="176" r="6"/><text class="map-label" x="265" y="197">Evidence</text><text class="map-state" x="265" y="211"></text></g><g id="map-lead_check" class="map-node" data-node="lead_check" data-state="waiting" role="button" tabindex="0" aria-pressed="false" aria-label="Lead · check gaps"><rect class="hit" x="111" y="248" width="98" height="48"/><circle class="map-dot" cx="160" cy="260" r="6"/><text class="map-label" x="160" y="281">Lead · check gaps</text><text class="map-state" x="160" y="295"></text></g><g id="map-writer" class="map-node" data-node="writer" data-state="waiting" role="button" tabindex="0" aria-pressed="false" aria-label="Writer"><rect class="hit" x="111" y="318" width="98" height="48"/><circle class="map-dot" cx="160" cy="330" r="6"/><text class="map-label" x="160" y="351">Writer</text><text class="map-state" x="160" y="365"></text></g><g id="map-reviewer" class="map-node" data-node="reviewer" data-state="waiting" role="button" tabindex="0" aria-pressed="false" aria-label="Citation reviewer"><rect class="hit" x="111" y="388" width="98" height="48"/><circle class="map-dot" cx="160" cy="400" r="6"/><text class="map-label" x="160" y="421">Citation reviewer</text><text class="map-state" x="160" y="435"></text></g><g id="map-answer" class="map-node" data-node="answer" data-state="waiting" role="button" tabindex="0" aria-pressed="false" aria-label="Answer"><rect class="hit" x="111" y="458" width="98" height="48"/><circle class="map-dot" cx="160" cy="470" r="6"/><text class="map-label" x="160" y="491">Answer</text><text class="map-state" x="160" y="505"></text></g></svg><div class="map-legend" aria-hidden="true"><span>Waiting</span><span class="working">Working</span><span class="finished">Finished</span></div><p id="map-detail" aria-live="polite"></p></div></section></aside></div>
+
+<script>
+'use strict';const $=id=>document.getElementById(id);let busy=false,sessionId=null,turns=[];const key='bitecheck.live-chat.v1';
+function el(tag,text,cls){const n=document.createElement(tag);if(text!==undefined)n.textContent=text;if(cls)n.className=cls;return n}
+function a(text,url){try{const u=new URL(url);if(u.protocol!=='https:')return el('span',text);const n=el('a',text);n.href=u.href;n.target='_blank';n.rel='noopener noreferrer';return n}catch{return el('span',text)}}
+function scrollTo(n){const chat=$('chat-scroll');const top=chat.scrollTop+n.getBoundingClientRect().top-chat.getBoundingClientRect().top-20;chat.scrollTo({top:Math.max(0,top),behavior:'auto'})}
+function setMapOpen(open){document.body.dataset.mapOpen=String(open);$('toggle-map').setAttribute('aria-expanded',String(open));$('toggle-map').textContent=open?'Back to chat':'Agent map'}
+function save(){try{sessionStorage.setItem(key,JSON.stringify({sessionId,turns}))}catch{}}
+function paragraph(f,sources){const p=el('p',f.text);for(const id of [...new Set(f.source_ids)]){const i=sources.findIndex(s=>s.id===id);if(i>=0){const ref=a('['+(i+1)+']',sources[i].url);ref.className='ref';p.append(' ',ref)}}return p}
+const names={energy_kcal:'Energy (kcal)',total_fat_g:'Total fat (g)',carbohydrates_g:'Carbohydrates (g)',sugars_g:'Total sugars (g)',added_sugars_g:'Added sugars (g)',saturated_fat_g:'Saturated fat (g)',sodium_mg:'Sodium (mg)',fiber_g:'Fiber (g)',protein_g:'Protein (g)'};
+function comparisonMarket(record){
+  const raw=String(record.market||record.country||record.category||record.name||'Unknown');
+  const key=raw.toLowerCase().replace(/[^a-z0-9]/g,'');
+  return {us:'US',usa:'US',unitedstates:'US',unitedstatesofamerica:'US',de:'DE',germany:'DE',deutschland:'DE',fr:'FR',france:'FR',it:'IT',italy:'IT',es:'ES',spain:'ES',nl:'NL',netherlands:'NL',gb:'GB',uk:'GB',unitedkingdom:'GB',eu:'EU',europeanunion:'EU'}[key]||raw.trim().toLowerCase().replace(/\s+/g,' ');
+}
+function knownNutritionValue(value){return (typeof value==='number'||typeof value==='string'&&value.trim()!=='')&&Number.isFinite(Number(value))&&Number(value)>=0}
+function selectComparisonRecords(records){
+  const selected=new Map();
+  const completeness=record=>Object.keys(names).filter(key=>knownNutritionValue(record.normalized_nutrients?.[key])).length;
+  for(const record of records){const key=comparisonMarket(record),previous=selected.get(key);if(!previous||completeness(record)>completeness(previous))selected.set(key,record)}
+  return [...selected.values()];
+}
+function renderComparison(c,root){const records=selectComparisonRecords(c.records||[]);if(!records.length)return;const d=el('section',undefined,'nutrition-comparison');d.append(el('h3','Nutrition comparison · per '+c.basis));const wrap=el('div',undefined,'table-scroll'),t=el('table'),head=el('tr');head.append(el('th','Nutrient'));for(const r of records){const th=el('th');const country={US:'United States',FR:'France',DE:'Germany',IT:'Italy',ES:'Spain',NL:'Netherlands',GB:'United Kingdom',EU:'European Union'}[comparisonMarket(r)]||r.market||r.country||r.category||r.name||'Unknown';th.append(r.source_url?a(country,r.source_url):el('span',country));head.append(th)};t.append(head);for(const [k,v]of Object.entries(names)){const tr=el('tr');tr.append(el('td',v));for(const r of records){const n=r.normalized_nutrients?.[k];tr.append(el('td',!knownNutritionValue(n)?'Unknown':Number(n).toLocaleString(undefined,{maximumFractionDigits:1})))}t.append(tr)}wrap.append(t);d.append(wrap,el('small','Calculated from retrieved label declarations. Missing values are not zero.'));root.append(d)}
+function entry(question){const article=el('article',undefined,'message');article.append(el('h2',question,'question'));const body=el('div',undefined,'answer');article.append(body);$('conversation').append(article);return {article,body}}
+function result(body,data,question=''){body.replaceChildren();const sources=data.sources||[];if(data.report){body.append(paragraph(data.report.answer,sources));for(const f of data.report.findings)body.append(paragraph(f,sources));if(data.report.limitations.length){const limits=el('div',undefined,'limits');limits.append(el('p','What remains uncertain'));const ul=el('ul');for(const l of data.report.limitations)ul.append(el('li',l));limits.append(ul);body.append(limits)}}else body.append(el('p',data.response||data.detail||'The investigation could not finish.',data.status==='error'?'error':''));for(const c of data.comparisons||[])renderComparison(c,body);if(sources.length){const d=el('details');d.append(el('summary','Sources for this answer ('+sources.length+')'));const list=el('ol');for(const s of sources){const li=el('li');li.append(a(s.title,s.url),el('small',s.publisher+' · retrieved '+new Date(s.observed_date).toLocaleString()));list.append(li)}d.append(list);body.append(d)}if(data.search_suggestions?.length){const d=el('details');d.append(el('summary','Google Search queries'));for(const html of data.search_suggestions){const frame=el('iframe');frame.className='search-entry';frame.title='Google Search suggestions';frame.sandbox='allow-popups allow-popups-to-escape-sandbox';frame.srcdoc=html;d.append(frame)}body.append(d)}renderActivity(data.tool_calls,body);paintArchitecture(data.activity||null,data.status||'error',question);}
+
+// Architecture view
+const architectureNodes={
+  clarifier:{label:'Clarifier',description:'Checks what the question is asking.'},
+  lead_plan:{label:'Lead · plan',description:'Splits the question into three independent research tasks.'},
+  product:{label:'Product researcher',description:'Finds manufacturer labels and compares equivalent quantities.'},
+  regulation:{label:'Regulation researcher',description:'Checks official rules and their jurisdictions.'},
+  evidence:{label:'Evidence researcher',description:'Looks for scientific assessments and studies.'},
+  lead_check:{label:'Lead · check gaps',description:'Reviews the researchers’ findings and requests follow-up research when needed.'},
+  writer:{label:'Writer',description:'Builds the answer from retrieved evidence.'},
+  reviewer:{label:'Citation reviewer',description:'Checks the claims against their sources and can request a revision.'},
+  answer:{label:'Answer',description:'The checked answer is ready to read.'}
+};
+function architectureAgent(agent,events=[]){
+  if(agent==='Lead')return events.some(e=>e.node==='lead_check')?'lead_check':'lead_plan';
+  return {'Clarifier':'clarifier','Writer':'writer','Citation Reviewer':'reviewer',Product:'product',Regulation:'regulation',Evidence:'evidence'}[agent]||{Product:'product',Regulation:'regulation',Evidence:'evidence'}[(agent||'').split(' ')[0]];
+}
+function architectureState(activity,status='running'){
+  const nodes=Object.fromEntries(Object.keys(architectureNodes).map(id=>[id,{status:'waiting',event:null}]));
+  const edges={},events=activity?.events||[],running=new Map();let revision=false,checkedBefore=false;
+  const edge=(id,active=false)=>{edges[id]={status:active?'active':'done'}};
+  for(const event of events){
+    const node=nodes[event.node];if(!node)continue;node.event=event;
+    if(event.kind.endsWith('_started')){
+      running.set(event.operation_id,event);node.status='done';
+      if(event.kind==='model_started'){
+        if(event.node==='lead_plan')edge(checkedBefore?'check_plan':'clarify_plan');
+        if(['product','regulation','evidence'].includes(event.node))edge('plan_'+event.node);
+        if(event.node==='lead_check')checkedBefore=true;
+        if(event.node==='writer')edge(revision?'review_writer':'check_writer');
+        if(event.node==='reviewer')edge('writer_review');
+      }
+      if(event.tool==='research'){
+        const specialty=event.specialty;
+        if(specialty)edge('plan_'+specialty,true);
+        if(checkedBefore)edge('check_plan');
+      }
+    }else{
+      running.delete(event.operation_id);node.status=event.kind.endsWith('_failed')?'error':'done';
+      if(event.tool==='research'&&event.specialty){edge('plan_'+event.specialty);edge(event.specialty+'_check')}
+    }
+    if(event.decision==='revise')revision=true;
+    if(event.decision==='approved')revision=false;
+  }
+  for(const event of running.values()){
+    // A Lead delegation stays open while its child works. It does not mean
+    // that the Lead is doing a model completion at the same time.
+    if(event.agent==='Lead'&&event.tool==='research')continue;
+    nodes[event.node].status='active';
+  }
+  for(const agent of activity?.active_agents||[]){const id=architectureAgent(agent,events);if(id)nodes[id].status='active'}
+  for(const agent of activity?.queued_agents||[]){const id=architectureAgent(agent,events);if(id&&nodes[id].status!=='active')nodes[id].status='queued'}
+  for(const event of running.values()){
+    if(event.tool==='research'&&event.specialty)edge('plan_'+event.specialty,true);
+    if(event.kind==='model_started'){
+      if(event.node==='lead_plan')edge(checkedBefore?'check_plan':'clarify_plan',true);
+      if(event.node==='writer')edge(revision?'review_writer':'check_writer',true);
+      if(event.node==='reviewer')edge('writer_review',true);
+    }
+  }
+  if(status!=='running'){
+    for(const node of Object.values(nodes))if(['active','queued'].includes(node.status))node.status=status==='complete'?'done':'interrupted';
+    for(const value of Object.values(edges))if(value.status==='active')value.status='done';
+    if(status==='complete'&&events.length){nodes.answer.status='done';edge('review_answer')}
+    if(status==='clarification')nodes.clarifier.status='needs_input';
+  }
+  return {nodes,edges,revision};
+}
+let currentArchitecture={activity:null,status:'idle',question:''},selectedArchitectureNode=null;
+const architectureStatus={waiting:'Waiting',active:'Working',done:'Finished',queued:'Queued',error:'Step failed',interrupted:'Stopped',needs_input:'Needs your reply'};
+function paintArchitecture(activity,status='running',question=currentArchitecture.question){
+  currentArchitecture={activity,status,question};
+  const view=architectureState(activity,status),root=$('agent-map');if(!root)return;
+  for(const [id,node] of Object.entries(view.nodes)){
+    const group=$('map-'+id);group.setAttribute('data-state',node.status);group.setAttribute('aria-pressed',String(selectedArchitectureNode===id));
+    const stateText=status==='idle'?'':architectureStatus[node.status];
+    group.querySelector('.map-state').textContent=stateText;
+    group.setAttribute('aria-label',architectureNodes[id].label+(stateText?', '+stateText:''));
+  }
+  root.querySelectorAll('[data-edge]').forEach(path=>path.setAttribute('data-state',view.edges[path.dataset.edge]?.status||'waiting'));
+  const active=Object.values(view.nodes).filter(n=>n.status==='active').length;
+  $('map-status').textContent=status==='idle'?'Ready':status==='complete'?'Finished':status==='clarification'?'Your turn':status==='running'?(active?active+' working':'In progress'):'Stopped';
+  $('map-question').textContent=question||'Follow a question through the research team';$('map-question').title=question;
+  if(selectedArchitectureNode)describeArchitectureNode(selectedArchitectureNode,view);
+  else $('map-detail').textContent=status==='running'?'Select an agent to see its current task.':status==='complete'?(activity?.events?.length?'Finished for this answer. Select an agent to inspect its work.':'This saved answer has no live execution trace.'):status==='clarification'?'The clarifier is waiting for your reply.':status==='idle'?'Select an agent to see what it does.':'The investigation stopped before a checked answer was ready.';
+}
+function describeArchitectureNode(id,view=architectureState(currentArchitecture.activity,currentArchitecture.status)){
+  const node=view.nodes[id],definition=architectureNodes[id];if(!node||!definition)return;
+  selectedArchitectureNode=id;
+  $('agent-map').querySelectorAll('[data-node]').forEach(group=>group.setAttribute('aria-pressed',String(group.dataset.node===id)));
+  const latest=(currentArchitecture.activity?.events||[]).filter(e=>e.node===id&&e.task).at(-1);
+  $('map-detail').textContent=definition.label+': '+(latest?latest.task:definition.description);$('map-detail').title=$('map-detail').textContent;
+}
+function initializeArchitecture(){
+  const root=$('agent-map');if(!root)return;
+  setMapOpen(false);$('toggle-map').addEventListener('click',()=>setMapOpen(document.body.dataset.mapOpen!=='true'));
+  root.querySelectorAll('[data-node]').forEach(group=>{
+    const choose=()=>describeArchitectureNode(group.dataset.node);
+    group.addEventListener('click',choose);
+    group.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();choose()}});
+  });
+  paintArchitecture(null,'idle','');
+}
+initializeArchitecture();
+// End architecture view
+
+const toolNames={extract_label:'Read nutrition panel',inspect_label_coverage:'Check label coverage',read_label_image:'Read label image',research:'Research task',search_sources:'Search for sources',read_source:'Read a source',normalize_label:'Compare label quantities',clarify_question:'Clarify the question',write_report:'Write the answer',check_report:'Check citations',finish_research:'Finish research'};
+function activityGroups(calls){
+  const groups=new Map();
+  calls.forEach((call,index)=>{
+    const agent=call.agent||'Researcher';
+    if(!groups.has(agent)){
+      const match=agent.match(/^(Product|Regulation|Evidence) Researcher(?: (\d+))?$/);
+      groups.set(agent,{agent,role:match?.[1],legacyNumber:match?.[2]?Number(match[2]):null,first:index,order:Infinity,calls:[]});
+    }
+    const group=groups.get(agent);group.calls.push(call);
+    if(Number.isFinite(call.task_order))group.order=Math.min(group.order,call.task_order);
+  });
+  const phase=group=>group.agent==='Clarifier'?0:group.agent==='Lead'?1:group.role?2:group.agent==='Writer'?3:group.agent==='Citation Reviewer'?4:2;
+  const order=group=>Number.isFinite(group.order)?group.order:group.legacyNumber??group.first;
+  const ordered=[...groups.values()].sort((left,right)=>phase(left)-phase(right)||order(left)-order(right)||left.first-right.first);
+  const counts={};
+  for(const group of ordered){
+    if(group.role){const n=(counts[group.role]||0)+1;counts[group.role]=n;group.label=group.role+' Researcher'+(n>1?' '+n:'')}
+    else group.label=group.agent;
+  }
+  return ordered;
+}
+function activityGroups(calls){
+  const groups=new Map();
+  calls.forEach((call,index)=>{
+    const agent=call.agent||'Researcher';
+    if(!groups.has(agent)){
+      const match=agent.match(/^(Product|Regulation|Evidence) Researcher(?: (\d+))?$/);
+      groups.set(agent,{agent,role:match?.[1],legacyNumber:match?.[2]?Number(match[2]):null,first:index,order:Infinity,calls:[]});
+    }
+    const group=groups.get(agent);group.calls.push(call);
+    if(Number.isFinite(call.task_order))group.order=Math.min(group.order,call.task_order);
+  });
+  const phase=group=>group.agent==='Clarifier'?0:group.agent==='Lead'?1:group.role?2:group.agent==='Writer'?3:group.agent==='Citation Reviewer'?4:2;
+  const order=group=>Number.isFinite(group.order)?group.order:group.legacyNumber??group.first;
+  const ordered=[...groups.values()].sort((left,right)=>phase(left)-phase(right)||order(left)-order(right)||left.first-right.first);
+  const counts={};
+  for(const group of ordered){
+    if(group.role){const n=(counts[group.role]||0)+1;counts[group.role]=n;group.label=Number.isFinite(group.order)?group.agent:group.role+' Researcher'+(n>1?' '+n:'')}
+    else group.label=group.agent;
+  }
+  return ordered;
+}
+function renderActivity(calls,root){
+  if(!calls?.length)return;
+  const trace=el('details',undefined,'research-activity');trace.append(el('summary','Research activity'));
+  const content=el('div',undefined,'activity-content');
+  for(const entry of activityGroups(calls)){
+    const group=el('section',undefined,'agent-group');group.append(el('h3',entry.label,'agent-name'));
+    for(const c of entry.calls){
+      const d=el('details',undefined,'research-call'),summary=el('summary',toolNames[c.name]||c.name.replaceAll('_',' '));
+      summary.append(el('span',c.status||'complete','call-status'));d.append(summary);
+      let value=c.result;try{value=JSON.parse(value)}catch{}
+      d.append(el('pre',JSON.stringify({tool:c.name,arguments:c.args,result:value},null,2)));group.append(d);
+    }
+    content.append(group);
+  }
+  trace.append(content);root.append(trace);
+}
+function startResearchProgress(root,requestId,options={}){
+  const now=options.now||(()=>performance.now()),every=options.every||setInterval,cancelEvery=options.cancelEvery||clearInterval,after=options.after||setTimeout,cancelAfter=options.cancelAfter||clearTimeout;
+  const getProgress=options.getProgress||(async()=>{const r=await fetch('/progress/'+requestId);if(!r.ok)throw Error('Progress unavailable');return r.json()});
+  const mark=document.createElementNS('http://www.w3.org/2000/svg','svg');mark.setAttribute('viewBox','0 0 64 64');mark.setAttribute('class','progress-mark');mark.setAttribute('aria-hidden','true');
+  const use=document.createElementNS('http://www.w3.org/2000/svg','use');use.setAttribute('href','#orange');mark.append(use);
+  const phase=el('span','Starting research…','progress-phase'),count=el('span',undefined,'progress-count'),clock=el('span','0s','progress-clock');
+  phase.setAttribute('role','status');clock.setAttribute('aria-label','Elapsed research time');clock.setAttribute('role','timer');clock.setAttribute('aria-live','off');root.append(mark,phase,clock);
+  const started=now();let stopped=false,nextPoll,shownSeconds=0;
+  const timer=every(()=>{if(stopped)return;const seconds=Math.floor(Math.max(0,now()-started)/1000);if(seconds!==shownSeconds){shownSeconds=seconds;clock.textContent=seconds+'s'}},100);
+  async function poll(){
+    try{const p=await getProgress();if(stopped)return;if(options.onProgress)options.onProgress(p);const agents=p.active_agents||[];phase.textContent=agents.includes('Writer')||agents.includes('Citation Reviewer')?'Writing and checking the answer':'Researching your question';if(p.sources_read){count.textContent=p.sources_read+' sources read';phase.append(count)}}catch{}
+    if(!stopped)nextPoll=after(poll,1200);
+  }
+  poll();
+  return ()=>{stopped=true;cancelEvery(timer);if(nextPoll!==undefined)cancelAfter(nextPoll)};
+}
+
+try{const old=JSON.parse(sessionStorage.getItem(key)||'null');if(old){sessionId=old.sessionId;turns=old.turns||[];for(const t of turns){const e=entry(t.question);result(e.body,t.data,t.question)}}}catch{}
+document.querySelectorAll('[data-question]').forEach(n=>n.addEventListener('click',()=>{if(busy)return;$('question').value=n.dataset.question;$('question').focus({preventScroll:true})}));
+$('question').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();$('composer').requestSubmit()}});
+$('composer').addEventListener('submit',async e=>{
+  e.preventDefault();const question=$('question').value.trim();if(busy||!question)return;
+  busy=true;$('send').disabled=true;$('new').disabled=true;$('question').value='';
+  const item=entry(question),progress=el('div',undefined,'progress');item.body.append(progress);scrollTo(item.article);
+  const requestId=crypto.randomUUID(),stopProgress=startResearchProgress(progress,requestId,{onProgress:p=>paintArchitecture(p.activity,'running',question)});paintArchitecture(null,'running',question);
+  try{
+    const r=await fetch('/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:question,session_id:sessionId,request_id:requestId})});
+    const data=await r.json();stopProgress();if(data.session_id)sessionId=data.session_id;result(item.body,data,question);turns.push({question,data});save();
+  }catch{stopProgress();result(item.body,{status:'error',activity:currentArchitecture.activity,response:'The connection ended before the answer arrived. Please try again.'},question)}
+  finally{stopProgress();busy=false;$('send').disabled=false;$('new').disabled=false}
+});
+$('new').addEventListener('click',async()=>{if(busy)return;if(sessionId){try{const r=await fetch('/clear',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({session_id:sessionId})});if(!r.ok)throw Error()}catch{$('notice').hidden=false;$('notice').textContent='Could not close this chat. Please try again.';return}}sessionId=null;turns=[];selectedArchitectureNode=null;paintArchitecture(null,'idle','');sessionStorage.removeItem(key);$('conversation').replaceChildren();$('welcome').hidden=false;$('notice').hidden=true;$('question').value='';setMapOpen(false);$('chat-scroll').scrollTo({top:0,behavior:'auto'});$('question').focus({preventScroll:true})});
+fetch('/health').then(r=>r.json()).then(h=>{if(!h.model_configured){$('notice').hidden=false;$('notice').textContent='Research is not connected yet. Check the server’s model configuration.'}}).catch(()=>{$('notice').hidden=false;$('notice').textContent='Could not connect to BiteCheck. Start the local server and reload.'});
+</script></body></html>

@@ -1,0 +1,225 @@
+{
+  "question": "Compare Nutella Classic in the US, Germany and Italy. Does the Italian version have substantially less total sugar?",
+  "model": "vertex_ai/gemini-3.5-flash-lite",
+  "baseline": "To answer your question directly: **No, the Italian version of Nutella does not have substantially less total sugar than the US or German versions.** \n\nDespite a very common internet rumor that European Nutella is less sweet or healthier than US Nutella, laboratory analyses and official nutrition labels show that the core recipe—and specifically the sugar content—is nearly identical across these countries.\n\nHere is a comparison of Nutella Classic in the US, Germany, and Italy.\n\n---\n\n### 1. Sugar Content Comparison (per 100g)\nIf you look at the nutritional information normalized per 100 grams, the sugar content across all three countries sits right around **56% to 57%**:\n\n*   **Italy:** ~56.3g of sugar per 100g\n*   **Germany:** ~56.3g of sugar per 100g\n*   **United States:** ~57.0g of sugar per 100g (calculated from 21g of sugar per 37g serving)\n\nAs you can see, the difference in total sugar is negligible (less than 1 gram per 100g). Sugar is consistently the #1 ingredient by weight in all regions, followed by palm oil and hazelnuts.\n\n---\n\n### 2. Ingredient and Taste Differences\nWhile the *amount* of sugar is virtually the same, people often report that European Nutella tastes \"richer\" or \"less cloyingly sweet\" than the US version. This comes down to a few subtle factors rather than the sugar quantity:\n\n*   **Hazelnut and Cocoa Quality:** Ferrero (the maker of Nutella) sources ingredients globally, but European versions often use slightly fresher or differently roasted hazelnuts (such as those from the Mediterranean region), which provide a more prominent nutty flavor that can balance the perception of sweetness.\n*   **Type of Sugar:** In Europe, Nutella is typically made with beet sugar. In the US, it is made with refined cane sugar (and sometimes beet sugar depending on supply chains). While chemically almost identical, some people claim to notice a slight taste difference between cane and beet sugar. (Note: *Nutella does not use High Fructose Corn Syrup in the US*, contrary to popular belief).\n*   **Dairy Solids:** The ratio and processing of the skimmed milk powder can vary slightly depending on local dairy regulations and sourcing, affecting mouthfeel and creaminess. A creamier texture causes the palate to perceive sweetness differently.\n\n---\n\n### 3. Labeling and Serving Sizes\nThe biggest difference consumers notice is actually how the nutrition facts are presented:\n\n*   **The US Label:** Displays nutrition based on a 2-tablespoon serving (37 grams), which contains **21 grams of sugar**. It also lists \"Added Sugars\" explicitly.\n*   **The European Labels (Italy/Germany):** Display nutrition per 100 grams, as well as per \"portion\" (usually 15g). Because the European portion size is smaller (15g vs. 37g), the sugar per *labeled serving* looks much lower in Europe (about 8.5g of sugar), which often tricks consumers into thinking the product itself is lighter.\n\n### Summary\nIf you are eating Nutella in Rome, Berlin, or New York, you are consuming almost the exact same amount of sugar: **over 56% of the jar is pure sugar.** Any perceived difference in sweetness is primarily due to differences in hazelnut roasting, dairy composition, and how the serving sizes are marketed.",
+  "agent": {
+    "status": "complete",
+    "response": "**Not supported**\n\nNo, the Italian version does not have substantially less total sugar than the German version or the US version. Official manufacturer nutrition declarations per 100g show that Nutella Classica in Italy and Nutella Classic in Germany contain identical declared values of 56.3g of total sugars, while the US version normalized per 100g contains approximately 56.8g of total sugars. [www.nutella.com: web-16a087ab28a1](https://www.nutella.com/de/de/products/brotaufstrich/nutella) [www.nutella.com: web-2bb8c8279377](https://www.nutella.com/it/it/prodotti/crema-spalmabile/nutella) [www.ferrerofoodservice.com: web-cde15bbbfed8](https://www.ferrerofoodservice.com/us/en/brands/nutella/nutella-jar-26oz)\n\nOfficial product specifications from Ferrero for both the Italian and German markets list identical ingredient formulations and per-100g nutritional values, including 57.5g of total carbohydrates, 30.9g of total fat, and 539 kcal. [www.nutella.com: web-16a087ab28a1](https://www.nutella.com/de/de/products/brotaufstrich/nutella) [www.nutella.com: web-2bb8c8279377](https://www.nutella.com/it/it/prodotti/crema-spalmabile/nutella)\n\nAlthough sensory evaluations and consumer reports sometimes describe regional variations in perceived sweetness or texture, manufacturer data confirms that the core recipe and sugar concentrations remain uniform across these European markets. [www.nutella.com: web-42bb5520341a](https://www.nutella.com/int/en/inside-nutella/quality-and-ingredients) [www.mentalfloss.com: web-fcd5ac4a2c37](https://www.mentalfloss.com/food/italian-vs-american-nutella-whats-the-difference)\n\n**What the evidence cannot establish**\n\n- This investigation verified official manufacturer label data for Nutella Classic in the US, Germany, and Italy, but did not perform independent chemical laboratory assays on physical retail samples.\n\nEvidence snapshot: 2026-11-18T03:10:58.205689+00:00. Country coverage is limited to the sources retrieved for this question.",
+    "report": {
+      "verdict": "Not supported",
+      "answer": {
+        "text": "No, the Italian version does not have substantially less total sugar than the German version or the US version. Official manufacturer nutrition declarations per 100g show that Nutella Classica in Italy and Nutella Classic in Germany contain identical declared values of 56.3g of total sugars, while the US version normalized per 100g contains approximately 56.8g of total sugars.",
+        "source_ids": [
+          "web-16a087ab28a1",
+          "web-2bb8c8279377",
+          "web-cde15bbbfed8"
+        ]
+      },
+      "findings": [
+        {
+          "text": "Official product specifications from Ferrero for both the Italian and German markets list identical ingredient formulations and per-100g nutritional values, including 57.5g of total carbohydrates, 30.9g of total fat, and 539 kcal.",
+          "source_ids": [
+            "web-16a087ab28a1",
+            "web-2bb8c8279377"
+          ]
+        },
+        {
+          "text": "Although sensory evaluations and consumer reports sometimes describe regional variations in perceived sweetness or texture, manufacturer data confirms that the core recipe and sugar concentrations remain uniform across these European markets.",
+          "source_ids": [
+            "web-42bb5520341a",
+            "web-fcd5ac4a2c37"
+          ]
+        }
+      ],
+      "limitations": [
+        "This investigation verified official manufacturer label data for Nutella Classic in the US, Germany, and Italy, but did not perform independent chemical laboratory assays on physical retail samples."
+      ]
+    },
+    "comparisons": [
+      {
+        "pair_id": "live-labels",
+        "name": "Retrieved label comparison",
+        "basis": "100 g",
+        "records": [
+          {
+            "source_id": "web-2bb8c8279377",
+            "market": "IT",
+            "name": "Nutella Classica IT",
+            "basis_amount": 100.0,
+            "basis_unit": "g",
+            "nutrients": {
+              "energy_kcal": 539.0,
+              "total_fat_g": 30.9,
+              "saturated_fat_g": 10.6,
+              "carbohydrates_g": 57.5,
+              "sugars_g": 56.3,
+              "protein_g": 6.3,
+              "salt_g": 0.107
+            },
+            "normalized_nutrients": {
+              "energy_kcal": 539.0,
+              "total_fat_g": 30.9,
+              "carbohydrates_g": 57.5,
+              "sugars_g": 56.3,
+              "added_sugars_g": null,
+              "saturated_fat_g": 10.6,
+              "sodium_mg": 42.8,
+              "fiber_g": null,
+              "protein_g": 6.3
+            },
+            "source_url": "https://www.nutella.com/it/it/prodotti/crema-spalmabile/nutella",
+            "source_title": "Nutella® Classica | Nutella® Italia"
+          },
+          {
+            "source_id": "web-16a087ab28a1",
+            "market": "DE",
+            "name": "Nutella Classic DE",
+            "basis_amount": 100.0,
+            "basis_unit": "g",
+            "nutrients": {
+              "energy_kcal": 539.0,
+              "total_fat_g": 30.9,
+              "saturated_fat_g": 10.6,
+              "carbohydrates_g": 57.5,
+              "sugars_g": 56.3,
+              "protein_g": 6.3,
+              "salt_g": 0.107
+            },
+            "normalized_nutrients": {
+              "energy_kcal": 539.0,
+              "total_fat_g": 30.9,
+              "carbohydrates_g": 57.5,
+              "sugars_g": 56.3,
+              "added_sugars_g": null,
+              "saturated_fat_g": 10.6,
+              "sodium_mg": 42.8,
+              "fiber_g": null,
+              "protein_g": 6.3
+            },
+            "source_url": "https://www.nutella.com/de/de/products/brotaufstrich/nutella",
+            "source_title": "nutella® Classic| nutella® DE"
+          },
+          {
+            "market": "US",
+            "name": "Nutella Classic US",
+            "source_id": "web-cde15bbbfed8",
+            "nutrients": {
+              "fiber_g": 1,
+              "sugars_g": 21,
+              "saturated_fat_g": 4,
+              "carbohydrates_g": 22,
+              "total_fat_g": 11,
+              "protein_g": 2,
+              "energy_kcal": 200,
+              "sodium_mg": 15
+            },
+            "basis_unit": "g",
+            "basis_amount": 37,
+            "normalized_nutrients": {
+              "energy_kcal": 540.5,
+              "total_fat_g": 29.7,
+              "carbohydrates_g": 59.5,
+              "sugars_g": 56.8,
+              "added_sugars_g": null,
+              "saturated_fat_g": 10.8,
+              "sodium_mg": 40.5,
+              "fiber_g": 2.7,
+              "protein_g": 5.4
+            },
+            "source_url": "https://www.ferrerofoodservice.com/us/en/brands/nutella/nutella-jar-26oz",
+            "source_title": "Nutella® Jar, 26.5 oz. wholesale in USA | Ferrero Food Service"
+          }
+        ],
+        "source_ids": [
+          "web-2bb8c8279377",
+          "web-16a087ab28a1",
+          "web-cde15bbbfed8"
+        ],
+        "market_coverage": {
+          "IT": {
+            "source_id": "web-2bb8c8279377",
+            "name": "Nutella Classica IT",
+            "source_url": "https://www.nutella.com/it/it/prodotti/crema-spalmabile/nutella",
+            "source_role_hint": "brand-domain candidate",
+            "available_fields": [
+              "energy_kcal",
+              "total_fat_g",
+              "carbohydrates_g",
+              "sugars_g",
+              "saturated_fat_g",
+              "sodium_mg",
+              "protein_g"
+            ],
+            "missing_core_fields": []
+          },
+          "DE": {
+            "source_id": "web-16a087ab28a1",
+            "name": "Nutella Classic DE",
+            "source_url": "https://www.nutella.com/de/de/products/brotaufstrich/nutella",
+            "source_role_hint": "brand-domain candidate",
+            "available_fields": [
+              "energy_kcal",
+              "total_fat_g",
+              "carbohydrates_g",
+              "sugars_g",
+              "saturated_fat_g",
+              "sodium_mg",
+              "protein_g"
+            ],
+            "missing_core_fields": []
+          },
+          "US": {
+            "source_id": "web-cde15bbbfed8",
+            "name": "Nutella Classic US",
+            "source_url": "https://www.ferrerofoodservice.com/us/en/brands/nutella/nutella-jar-26oz",
+            "source_role_hint": "brand-domain candidate",
+            "available_fields": [
+              "energy_kcal",
+              "total_fat_g",
+              "carbohydrates_g",
+              "sugars_g",
+              "saturated_fat_g",
+              "sodium_mg",
+              "fiber_g",
+              "protein_g"
+            ],
+            "missing_core_fields": []
+          }
+        }
+      }
+    ],
+    "elapsed_seconds": 56.98
+  },
+  "sources": [
+    {
+      "id": "web-16a087ab28a1",
+      "title": "nutella® Classic| nutella® DE",
+      "url": "https://www.nutella.com/de/de/products/brotaufstrich/nutella",
+      "observed_date": "2026-11-18T03:11:11.509908+00:00"
+    },
+    {
+      "id": "web-2bb8c8279377",
+      "title": "Nutella® Classica | Nutella® Italia",
+      "url": "https://www.nutella.com/it/it/prodotti/crema-spalmabile/nutella",
+      "observed_date": "2026-11-18T03:11:26.035882+00:00"
+    },
+    {
+      "id": "web-42bb5520341a",
+      "title": "Quality and Ingredients | Nutella®",
+      "url": "https://www.nutella.com/int/en/inside-nutella/quality-and-ingredients",
+      "observed_date": "2026-11-18T03:11:24.108142+00:00"
+    },
+    {
+      "id": "web-cde15bbbfed8",
+      "title": "Nutella® Jar, 26.5 oz. wholesale in USA | Ferrero Food Service",
+      "url": "https://www.ferrerofoodservice.com/us/en/brands/nutella/nutella-jar-26oz",
+      "observed_date": "2026-11-18T03:11:39.764980+00:00"
+    },
+    {
+      "id": "web-fcd5ac4a2c37",
+      "title": "Is There a Difference Between Italian and American Nutella?Share on XShare on XShare on FacebookShare on XShare on RedditCopy Article",
+      "url": "https://www.mentalfloss.com/food/italian-vs-american-nutella-whats-the-difference",
+      "observed_date": "2026-11-18T03:11:13.315660+00:00"
+    }
+  ]
+}

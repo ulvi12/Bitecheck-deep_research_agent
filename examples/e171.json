@@ -1,0 +1,67 @@
+{
+  "question": "Is titanium dioxide (E171) permitted as a food additive in the US and EU, and why do the rules differ?",
+  "model": "vertex_ai/gemini-3.5-flash-lite",
+  "baseline": "The regulatory status of titanium dioxide (E171) as a food additive differs significantly between the European Union and the United States. \n\nHere is the current status in both regions and the reasons behind the divergence:\n\n---\n\n### 1. Status in the European Union (Prohibited)\nTitanium dioxide **is banned** for use as a food additive in the EU. \n* **Timeline:** Following a scientific safety assessment, the European Commission adopted a ban that took full effect in February 2022 (after a six-month transition period).\n* **The Reason:** In May 2021, the European Food Safety Authority (EFSA) updated its safety assessment of E171. EFSA concluded that titanium dioxide **can no longer be considered safe as a food additive** because genotoxicity (the ability of a substance to damage DNA) could not be ruled out after the consumption of titanium dioxide particles. Because these particles can accumulate in the body over time, EFSA determined they posed a risk of causing DNA strand breaks and chromosomal damage.\n\n### 2. Status in the United States (Permitted)\nTitanium dioxide **is permitted** as a food additive in the US, regulated by the U.S. Food and Drug Administration (FDA).\n* **Regulations:** It is classified as a color additive and can be safely used in foods generally, provided that the quantity does not exceed **1% by weight** of the food (unless specified by a particular standard of identity).\n* **The Reason:** The FDA maintains that the scientific studies cited by the EU do not provide sufficient grounds to ban the substance. The FDA has reviewed various safety studies—including those on genotoxicity and carcinogenicity—and maintains its position that the existing data does not establish a dietary hazard at the levels used in food. \n\n---\n\n### Why Do the Rules Differ?\n\nThe differing stances between the US and the EU come down to two different regulatory philosophies and interpretations of safety data:\n\n1. **The Precautionary Principle (EU):** \n   European regulators operate largely under the \"precautionary principle.\" If there is scientific uncertainty or if a potential risk (like genotoxicity) cannot be definitively ruled out by available data, the EU tends to err on the side of caution and remove the substance from the market until proven safe. In the case of genotoxicity, EFSA considers there to be no safe threshold, meaning any level of exposure could theoretically pose a risk.\n\n2. **Risk Assessment and Thresholds (US):** \n   The FDA operates on a traditional \"risk-benefit\" and threshold-of-toxicity model. US regulations typically require clear, demonstrable evidence of harm under conditions of intended use before banning a substance already on the market. The FDA continues to evaluate new research as it emerges, but requires robust, conclusive proof of human dietary harm before revoking approval for established additives. \n\nAs a result, products like chewing gum, candies, pastries, and sauces containing E171/titanium dioxide are legal and sold in the US, but cannot be legally sold or manufactured with that additive in the EU.",
+  "agent": {
+    "status": "complete",
+    "response": "**Supported**\n\nTitanium dioxide (E171) is permitted as a food additive in the United States under FDA regulations (21 CFR 73.575) up to 1 percent by weight, but is banned as a food additive in the European Union under Commission Regulation (EU) 2022/63. The rules differ because the European Food Safety Authority (EFSA) concluded in 2021 that a concern for genotoxicity could not be ruled out for nanoparticle fractions, whereas the FDA maintains its authorization based on available safety reviews indicating no comparable dietary genotoxicity concern. [eur-lex.europa.eu: web-92425c2b9ede](https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:32022R0063) [www.fda.gov: web-9886a0da05fd](https://www.fda.gov/industry/color-additives/titanium-dioxide-color-additive-foods) [www.fda.gov: web-72af44b22338](https://www.fda.gov/industry/color-additives/titanium-dioxide-color-additive-foods)\n\nThe European Union removed titanium dioxide (E171) from its list of permitted food additives following an EFSA re-evaluation stating that safe daily intake levels could no longer be established due to unresolved uncertainties regarding genotoxicity after oral ingestion. [eur-lex.europa.eu: web-92425c2b9ede](https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:32022R0063) [www.efsa.europa.eu: web-c4235d5b5654](https://www.efsa.europa.eu/en/news/titanium-dioxide-e171-no-longer-considered-safe-when-used-food-additive)\n\nIn the United States, titanium dioxide remains listed as a color additive exempt from certification for food use provided it does not exceed 1 percent by weight, and the FDA continues to permit its use while reviewing an active color additive petition. [www.fda.gov: web-9886a0da05fd](https://www.fda.gov/industry/color-additives/titanium-dioxide-color-additive-foods) [www.fda.gov: web-72af44b22338](https://www.fda.gov/industry/color-additives/titanium-dioxide-color-additive-foods)\n\n**What the evidence cannot establish**\n\n- The regulatory status described reflects current federal rules and EU regulations but does not account for individual US state-level legislative variations or pending administrative petitions.\n\nEvidence snapshot: 2026-11-18T03:14:02.227038+00:00. Country coverage is limited to the sources retrieved for this question.",
+    "report": {
+      "verdict": "Supported",
+      "answer": {
+        "text": "Titanium dioxide (E171) is permitted as a food additive in the United States under FDA regulations (21 CFR 73.575) up to 1 percent by weight, but is banned as a food additive in the European Union under Commission Regulation (EU) 2022/63. The rules differ because the European Food Safety Authority (EFSA) concluded in 2021 that a concern for genotoxicity could not be ruled out for nanoparticle fractions, whereas the FDA maintains its authorization based on available safety reviews indicating no comparable dietary genotoxicity concern.",
+        "source_ids": [
+          "web-92425c2b9ede",
+          "web-9886a0da05fd",
+          "web-72af44b22338"
+        ]
+      },
+      "findings": [
+        {
+          "text": "The European Union removed titanium dioxide (E171) from its list of permitted food additives following an EFSA re-evaluation stating that safe daily intake levels could no longer be established due to unresolved uncertainties regarding genotoxicity after oral ingestion.",
+          "source_ids": [
+            "web-92425c2b9ede",
+            "web-c4235d5b5654"
+          ]
+        },
+        {
+          "text": "In the United States, titanium dioxide remains listed as a color additive exempt from certification for food use provided it does not exceed 1 percent by weight, and the FDA continues to permit its use while reviewing an active color additive petition.",
+          "source_ids": [
+            "web-9886a0da05fd",
+            "web-72af44b22338"
+          ]
+        }
+      ],
+      "limitations": [
+        "The regulatory status described reflects current federal rules and EU regulations but does not account for individual US state-level legislative variations or pending administrative petitions."
+      ]
+    },
+    "comparisons": [],
+    "elapsed_seconds": 35.47
+  },
+  "sources": [
+    {
+      "id": "web-72af44b22338",
+      "title": "Titanium Dioxide as a Color Additive in Foods | FDA",
+      "url": "https://www.fda.gov/industry/color-additives/titanium-dioxide-color-additive-foods",
+      "observed_date": "2026-11-18T03:14:25.722185+00:00"
+    },
+    {
+      "id": "web-92425c2b9ede",
+      "title": "europa.eu",
+      "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:32022R0063",
+      "observed_date": "2026-11-18T03:14:16.698385+00:00"
+    },
+    {
+      "id": "web-9886a0da05fd",
+      "title": "Titanium Dioxide as a Color Additive in Foods | FDA",
+      "url": "https://www.fda.gov/industry/color-additives/titanium-dioxide-color-additive-foods",
+      "observed_date": "2026-11-18T03:14:25.591902+00:00"
+    },
+    {
+      "id": "web-c4235d5b5654",
+      "title": "Titanium dioxide: E171 no longer considered safe when used as a food additive | EFSA",
+      "url": "https://www.efsa.europa.eu/en/news/titanium-dioxide-e171-no-longer-considered-safe-when-used-food-additive",
+      "observed_date": "2026-11-18T03:14:15.317415+00:00"
+    }
+  ]
+}

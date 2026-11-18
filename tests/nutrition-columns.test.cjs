@@ -1,0 +1,28 @@
+const assert=require('node:assert/strict'),vm=require('node:vm');
+const html=require('node:fs').readFileSync(require('node:path').join(__dirname,'..','index.html'),'utf8');
+const script=html.split('<script>')[1].split('</script>')[0];
+class Element{constructor(tag){this.tag=tag;this.children=[];this.textContent=''}append(...nodes){this.children.push(...nodes)}}
+const context=vm.createContext({el:(tag,text)=>Object.assign(new Element(tag),{textContent:text||''}),a:(label)=>Object.assign(new Element('a'),{textContent:label})});
+vm.runInContext(script.slice(script.indexOf('const names='),script.indexOf('function entry(')),context);
+const record=(market,values,name='Snack')=>({market,name,normalized_nutrients:values});
+const firstUS=record('US',{sugars_g:10});
+const bestUS=record('United States',{sugars_g:10,energy_kcal:100,sodium_mg:0});
+const firstDE=record('Germany',{sugars_g:4,sodium_mg:null});
+const bestDE=record('DE',{sugars_g:4,sodium_mg:0});
+const firstEU=record('EU',{sugars_g:5});
+const bestEU=record('European Union',{sugars_g:5,protein_g:3});
+const records=[firstUS,firstDE,firstEU,bestUS,bestDE,bestEU];
+const selected=context.selectComparisonRecords(records);
+assert.equal(selected.length,3);assert.equal(selected[0],bestUS);assert.equal(selected[1],bestDE);assert.equal(selected[2],bestEU);
+assert.equal(context.selectComparisonRecords([firstDE,record('deutschland',{sugars_g:5})])[0],firstDE,'Equal completeness keeps the existing entry');
+assert.equal(context.selectComparisonRecords([record('EU',{sugars_g:5}),record('Germany',{sugars_g:4})]).length,2,'An EU entry must not erase a country-specific entry');
+assert.equal(context.selectComparisonRecords([{name:'Retail pack',normalized_nutrients:{sugars_g:5}},{name:' retail   PACK ',normalized_nutrients:{sugars_g:5,protein_g:2}}]).length,1);
+assert.equal(context.selectComparisonRecords([firstUS,record('USA',{sugars_g:NaN,protein_g:'',fiber_g:null})])[0],firstUS);
+const root=new Element('div');context.renderComparison({basis:'100 g',records},root);
+const section=root.children[0],table=section.children[1].children[0];
+assert.equal(section.tag,'section');assert.equal(table.tag,'table');assert.equal(table.children[0].children.length,4);
+assert.deepEqual(table.children[0].children.slice(1).map(th=>th.children[0].textContent),['United States','Germany','European Union']);
+const sodium=table.children.find(row=>row.children[0].textContent==='Sodium (mg)');
+assert.equal(sodium.children[1].textContent,'0');assert.equal(sodium.children[2].textContent,'0');assert.equal(sodium.children[3].textContent,'Unknown');
+assert.equal(records.length,6,'Selection must preserve the original evidence records');
+console.log('Passed: country aliases, completeness selection, zero values, stable ties, category names, distinct EU/country columns, and rendered table');

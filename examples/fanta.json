@@ -1,0 +1,207 @@
+{
+  "question": "Compare the ingredients and sugar in regular Fanta Orange sold in the US and EU. Does the color difference prove that one version is safer?",
+  "model": "vertex_ai/gemini-3.5-flash-lite",
+  "baseline": "Comparing regular Fanta Orange sold in the United States to the version sold in the European Union reveals significant differences in ingredients, sweeteners, and coloring. \n\nHowever, looking strictly at the **color difference**, the answer is **no—the color difference alone does not scientifically \"prove\" that one version is safe and the other is unsafe.** Rather, the color is simply a visual byproduct of two entirely different regulatory philosophies and corporate recipes.\n\nHere is a breakdown of how the ingredients compare and what the regulatory differences actually mean.\n\n---\n\n### 1. Ingredient Comparison\n\n#### **US Fanta Orange**\n*   **Sweetener:** High Fructose Corn Syrup (HFCS).\n*   **Fruit Content:** Historically contains little to no actual orange juice (often 0% to 2% depending on the specific manufacturing batch, acting mainly as a flavoring agent).\n*   **Coloring:** Artificial petroleum-derived dyes, specifically **Yellow 6** and **Red 40**.\n*   **Preservatives/Additives:** Sodium benzoate, citric acid, modified food starch, natural and artificial flavors.\n\n#### **EU Fanta Orange (e.g., UK, Germany, France)**\n*   **Sweetener:** Sugar (sucrose, derived from sugar beets or cane sugar). *Note: Due to sugar reduction initiatives and taxes in Europe, some EU countries also mix in artificial sweeteners like acesulfame K and sucralose, but the \"full sugar\" versions use sucrose.*\n*   **Fruit Content:** Contains actual orange juice from concentrate, usually ranging from **3% to 8%** (depending on the country).\n*   **Coloring:** Natural colorings derived from plant extracts, such as **carrot and pumpkin concentrate** or **beta-carotene**.\n*   **Preservatives/Additives:** Citric acid, ascorbic acid (vitamin C), natural orange flavorings.\n\n---\n\n### 2. Sugar and Calorie Content\nWhile exact amounts vary by country due to local regulations and sugar taxes, US Fanta generally tends to have a higher overall sugar/calorie load per serving than many EU equivalents, and it relies entirely on HFCS rather than cane/beet sugar. Nutritionally, the body processes HFCS and sucrose very similarly, but many consumers prefer cane sugar due to concerns over heavily processed corn derivatives. Furthermore, the presence of actual fruit juice in the EU version adds a slight amount of natural acidity and authentic flavor.\n\n---\n\n### 3. Does the Color Difference Prove One is Safer?\n\n**The short answer:** The artificial dyes in US Fanta are legally approved by the US Food and Drug Administration (FDA), meaning they are considered \"safe\" for consumption under current US law. However, the European Food Safety Authority (EFSA) takes a more precautionary approach, which has led to different standards.\n\nHere is why the debate exists:\n\n*   **The Southampton Study (2007):** A notable study published in the UK suggested a link between certain artificial food colors (including Yellow 6) and increased hyperactivity in children. \n*   **EU Warning Labels:** As a result of this study, the European Union **does not ban** Yellow 6 outright, but any food or drink sold in the EU containing it must carry a warning label stating: *\"May have an adverse effect on activity and attention in children.\"* To avoid this warning label and appeal to consumer preferences, major brands like Coca-Cola voluntarily reformulated Fanta in Europe to use natural plant-based colorings.\n*   **The US FDA Stance:** The FDA has reviewed these same studies and maintains that the evidence is not strong enough to ban Yellow 6 or Red 40, or to require warning labels, concluding that the dyes are safe at the levels consumed in the American diet.\n\n### Conclusion\n\nThe difference in color between US Fanta (a bright, neon-orange achieved via synthetic dyes) and EU Fanta (a more muted, natural orange achieved via fruit and vegetable extracts) is a result of **corporate adaptation to local regulations and consumer demand**, not a clear-cut indicator of poison vs. safety. \n\nNeither version is a health food—both are sugary, acidic sodas. However, the EU version relies on real sugar, contains actual fruit juice, and avoids synthetic petroleum-based dyes, making it \"cleaner\" from an ingredient perspective.",
+  "agent": {
+    "status": "complete",
+    "response": "**Not supported**\n\nThe color difference between regular Fanta Orange sold in the United States and the European Union does not prove that one version is safer. Regular US Fanta Orange is sweetened with high fructose corn syrup and contains synthetic azo dyes (Yellow 6 and Red 40), whereas the German market variant is sweetened with sugar and colored with plant-derived carotenes. Normalized per 100 ml, US Fanta contains approximately 12.4g of total sugars and 45.7 kcal, compared to 7.6g to 9.1g of sugars and 32 to 38 kcal in verified German retail and manufacturer records. Regional differences in colorants reflect differing regulatory frameworks and risk management strategies rather than definitive proof of a safety disparity. [www.coca-cola.com: web-9660312ba25b](https://www.coca-cola.com/us/en/brands/fanta/products) [www.coca-cola.com: web-182daa632cb7](https://www.coca-cola.com/de/de/brands/fanta/fanta) [brezenglueck.de: web-3d123b6ce09e](https://brezenglueck.de/produkt/fanta-orange-05-l/) [smartfoodsafe.com: web-da5e6dff2e3c](https://smartfoodsafe.com/food-additive-development/)\n\nUS Fanta Orange ingredients include carbonated water, high fructose corn syrup, citric acid, natural flavors, sodium benzoate, modified food starch, glycerol ester of rosin, Yellow 6, and Red 40, with 73g of total sugars per 591 ml bottle. [www.coca-cola.com: web-9660312ba25b](https://www.coca-cola.com/us/en/brands/fanta/products)\n\nGerman Fanta Orange formulations utilize ingredients such as water, sugar, orange juice from concentrate (3%), citric and malic acids, citrus extract, sodium gluconate, stabilizers, ascorbic acid, and carotene for coloring, yielding 7.6g of sugar per 100 ml. [www.coca-cola.com: web-182daa632cb7](https://www.coca-cola.com/de/de/brands/fanta/fanta)\n\n**What the evidence cannot establish**\n\n- Comparison is restricted to the US market and the German market as verified by retrieved manufacturer and retail records.\n- Added sugars values could not be directly normalized due to missing explicit added sugar declarations on EU product labels.\n\nEvidence snapshot: 2026-11-18T03:14:53.959290+00:00. Country coverage is limited to the sources retrieved for this question.",
+    "report": {
+      "verdict": "Not supported",
+      "answer": {
+        "text": "The color difference between regular Fanta Orange sold in the United States and the European Union does not prove that one version is safer. Regular US Fanta Orange is sweetened with high fructose corn syrup and contains synthetic azo dyes (Yellow 6 and Red 40), whereas the German market variant is sweetened with sugar and colored with plant-derived carotenes. Normalized per 100 ml, US Fanta contains approximately 12.4g of total sugars and 45.7 kcal, compared to 7.6g to 9.1g of sugars and 32 to 38 kcal in verified German retail and manufacturer records. Regional differences in colorants reflect differing regulatory frameworks and risk management strategies rather than definitive proof of a safety disparity.",
+        "source_ids": [
+          "web-9660312ba25b",
+          "web-182daa632cb7",
+          "web-3d123b6ce09e",
+          "web-da5e6dff2e3c"
+        ]
+      },
+      "findings": [
+        {
+          "text": "US Fanta Orange ingredients include carbonated water, high fructose corn syrup, citric acid, natural flavors, sodium benzoate, modified food starch, glycerol ester of rosin, Yellow 6, and Red 40, with 73g of total sugars per 591 ml bottle.",
+          "source_ids": [
+            "web-9660312ba25b"
+          ]
+        },
+        {
+          "text": "German Fanta Orange formulations utilize ingredients such as water, sugar, orange juice from concentrate (3%), citric and malic acids, citrus extract, sodium gluconate, stabilizers, ascorbic acid, and carotene for coloring, yielding 7.6g of sugar per 100 ml.",
+          "source_ids": [
+            "web-182daa632cb7"
+          ]
+        }
+      ],
+      "limitations": [
+        "Comparison is restricted to the US market and the German market as verified by retrieved manufacturer and retail records.",
+        "Added sugars values could not be directly normalized due to missing explicit added sugar declarations on EU product labels."
+      ]
+    },
+    "comparisons": [
+      {
+        "pair_id": "live-labels",
+        "name": "Retrieved label comparison",
+        "basis": "100 ml",
+        "records": [
+          {
+            "source_id": "web-3d123b6ce09e",
+            "market": "DE",
+            "name": "Fanta Orange",
+            "basis_amount": 100.0,
+            "basis_unit": "ml",
+            "nutrients": {
+              "energy_kcal": 38.0,
+              "total_fat_g": 0.0,
+              "saturated_fat_g": 0.0,
+              "salt_g": 0.01,
+              "carbohydrates_g": 9.2,
+              "sugars_g": 9.1,
+              "protein_g": 0.0
+            },
+            "normalized_nutrients": {
+              "energy_kcal": 38.0,
+              "total_fat_g": 0.0,
+              "carbohydrates_g": 9.2,
+              "sugars_g": 9.1,
+              "added_sugars_g": null,
+              "saturated_fat_g": 0.0,
+              "sodium_mg": 4.0,
+              "fiber_g": null,
+              "protein_g": 0.0
+            },
+            "source_url": "https://brezenglueck.de/produkt/fanta-orange-05-l/",
+            "source_title": "Fanta Orange 0,5 l - Brezenglück Shop"
+          },
+          {
+            "name": "Fanta Orange Soda",
+            "source_id": "web-f183a39ca425",
+            "nutrients": {
+              "carbohydrates_g": 74,
+              "total_fat_g": 0,
+              "protein_g": 0,
+              "energy_kcal": 270,
+              "sodium_mg": 80,
+              "sugars_g": 73
+            },
+            "basis_amount": 591,
+            "market": "US",
+            "basis_unit": "ml",
+            "normalized_nutrients": {
+              "energy_kcal": 45.7,
+              "total_fat_g": 0.0,
+              "carbohydrates_g": 12.5,
+              "sugars_g": 12.4,
+              "added_sugars_g": null,
+              "saturated_fat_g": null,
+              "sodium_mg": 13.5,
+              "fiber_g": null,
+              "protein_g": 0.0
+            },
+            "source_url": "https://www.recipal.com/ingredients/518820-nutrition-facts-calories-protein-carbs-fat-fanta-orange-soda",
+            "source_title": "Fanta Orange Soda Nutrition Facts - Find Calories & Macros Per Serving"
+          },
+          {
+            "basis_unit": "ml",
+            "basis_amount": 100,
+            "market": "DE",
+            "nutrients": {
+              "salt_g": 0.01,
+              "saturated_fat_g": 0,
+              "sugars_g": 7.6,
+              "carbohydrates_g": 7.7,
+              "protein_g": 0,
+              "total_fat_g": 0,
+              "energy_kcal": 32
+            },
+            "source_id": "web-182daa632cb7",
+            "name": "Fanta Orange",
+            "normalized_nutrients": {
+              "energy_kcal": 32.0,
+              "total_fat_g": 0.0,
+              "carbohydrates_g": 7.7,
+              "sugars_g": 7.6,
+              "added_sugars_g": null,
+              "saturated_fat_g": 0.0,
+              "sodium_mg": 4.0,
+              "fiber_g": null,
+              "protein_g": 0.0
+            },
+            "source_url": "https://www.coca-cola.com/de/de/brands/fanta/fanta",
+            "source_title": "Die Fanta-Produkte - klassisch bis zuckerfrei | Coca-Cola DE"
+          }
+        ],
+        "source_ids": [
+          "web-3d123b6ce09e",
+          "web-f183a39ca425",
+          "web-182daa632cb7"
+        ],
+        "market_coverage": {
+          "DE": {
+            "source_id": "web-3d123b6ce09e",
+            "name": "Fanta Orange",
+            "source_url": "https://brezenglueck.de/produkt/fanta-orange-05-l/",
+            "source_role_hint": "other source; verify authority",
+            "available_fields": [
+              "energy_kcal",
+              "total_fat_g",
+              "carbohydrates_g",
+              "sugars_g",
+              "saturated_fat_g",
+              "sodium_mg",
+              "protein_g"
+            ],
+            "missing_core_fields": []
+          },
+          "US": {
+            "source_id": "web-f183a39ca425",
+            "name": "Fanta Orange Soda",
+            "source_url": "https://www.recipal.com/ingredients/518820-nutrition-facts-calories-protein-carbs-fat-fanta-orange-soda",
+            "source_role_hint": "other source; verify authority",
+            "available_fields": [
+              "energy_kcal",
+              "total_fat_g",
+              "carbohydrates_g",
+              "sugars_g",
+              "sodium_mg",
+              "protein_g"
+            ],
+            "missing_core_fields": [
+              "saturated_fat_g"
+            ]
+          }
+        }
+      }
+    ],
+    "elapsed_seconds": 75.8
+  },
+  "sources": [
+    {
+      "id": "web-182daa632cb7",
+      "title": "Die Fanta-Produkte - klassisch bis zuckerfrei | Coca-Cola DE",
+      "url": "https://www.coca-cola.com/de/de/brands/fanta/fanta",
+      "observed_date": "2026-11-18T03:15:47.732257+00:00"
+    },
+    {
+      "id": "web-3d123b6ce09e",
+      "title": "Fanta Orange 0,5 l - Brezenglück Shop",
+      "url": "https://brezenglueck.de/produkt/fanta-orange-05-l/",
+      "observed_date": "2026-11-18T03:15:27.157134+00:00"
+    },
+    {
+      "id": "web-9660312ba25b",
+      "title": "Fanta Flavors and Products | Coca-Cola US",
+      "url": "https://www.coca-cola.com/us/en/brands/fanta/products",
+      "observed_date": "2026-11-18T03:15:44.824970+00:00"
+    },
+    {
+      "id": "web-da5e6dff2e3c",
+      "title": "American and European Approaches to Food Safety in Food Additive DevelopmentWhatsApp",
+      "url": "https://smartfoodsafe.com/food-additive-development/",
+      "observed_date": "2026-11-18T03:15:19.730528+00:00"
+    },
+    {
+      "id": "web-f183a39ca425",
+      "title": "Fanta Orange Soda Nutrition Facts - Find Calories & Macros Per Serving",
+      "url": "https://www.recipal.com/ingredients/518820-nutrition-facts-calories-protein-carbs-fat-fanta-orange-soda",
+      "observed_date": "2026-11-18T03:15:17.232888+00:00"
+    }
+  ]
+}

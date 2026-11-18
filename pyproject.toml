@@ -1,0 +1,18 @@
+[project]
+name = "bitecheck"
+version = "0.1.0"
+description = "Research on US and European packaged-food claims using live sources"
+requires-python = ">=3.11"
+dependencies = [
+  "fastapi>=0.109.0",
+  "uvicorn>=0.27.0",
+  "litellm>=1.50",
+  "google-auth>=2.0",
+  "requests>=2.31",
+  "httpx>=0.27",
+  "pydantic>=2.10",
+  "pypdf>=5",
+]
+
+[tool.uv]
+package = false
